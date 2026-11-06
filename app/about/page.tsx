@@ -30,7 +30,8 @@ export default function AboutPage() {
       <div className="relative mx-auto grid max-w-[1440px] gap-14 px-5 pt-12 pb-20 lg:grid-cols-[380px_1fr] lg:items-start lg:gap-20 lg:px-14 lg:pt-[62px] lg:pb-16">
         <div className="flex flex-col gap-7">
           <div className="relative size-[140px] overflow-hidden rounded-full shadow-[0_0_0_3px_#0b0a09,0_0_0_5px_oklch(76%_.16_45),0_30px_60px_-20px_rgba(0,0,0,.8)] lg:size-[200px]">
-            <ImageSlot src={site.photo.src} alt={site.photo.alt} label="photo" sizes="200px" priority />
+            {/* The 3:4 photo is cropped to a circle here; bias it up so the whole head stays in frame. */}
+            <ImageSlot src={site.photo.src} alt={site.photo.alt} label="photo" sizes="200px" priority position="50% 15%" />
           </div>
           <div>
             <h1 className="font-display text-[48px] leading-[.95] font-extrabold tracking-[-.05em] lg:text-[60px]">{site.name}</h1>

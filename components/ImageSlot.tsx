@@ -7,12 +7,24 @@ type Props = {
   label: string;
   sizes?: string;
   priority?: boolean;
+  /** CSS object-position, e.g. "50% 15%" to keep a face in frame when the crop is tighter than the image. */
+  position?: string;
 };
 
 /** Fills its (relatively positioned) parent with an image, or a labelled placeholder. */
-export function ImageSlot({ src, alt, label, sizes = "100vw", priority }: Props) {
+export function ImageSlot({ src, alt, label, sizes = "100vw", priority, position }: Props) {
   if (src) {
-    return <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />;
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        className="object-cover"
+        style={position ? { objectPosition: position } : undefined}
+      />
+    );
   }
   return (
     <div
