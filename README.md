@@ -10,6 +10,7 @@ Everything on the site lives in **`content/site.ts`**: bio, links, skills, exper
 - Images go in `public/images/`. Set the matching `src` field, for example `photo: { src: "/images/photo.jpg" }`. An empty `src` shows a labelled placeholder box.
   - `photo`: hero photo (3:4) and About avatar
   - `projects[].images.tile`: home-screen tile art (square)
+  - `projects[].images.icon`: optional square app icon (transparent PNG/WebP with its own rounded corners), shown on the home tile and next to the project title
   - `projects[].images.hero`: full-screen background on the home screen and the hero image on the project page (4:3)
   - `projects[].phones[].src`: Valt's three phone screenshots, left to right (402×874 aspect; use 804×1748 for sharp 2× display). The frame draws a 9:41 status bar on top, so remove the screenshot's own.
   - `projects[].writeup.whatScreen`: optional phone screenshot under the "What it is" headline (after the text on phones), same size and aspect as `phones`

@@ -181,6 +181,13 @@
 ::view-transition-new(.morph-title) {
   object-position: left bottom;
 }
+/* Project-page app icon: appears after the title morph has mostly landed; leaves before it moves. */
+::view-transition-new(project-icon) {
+  animation: 220ms ease-out 320ms both vt-fade-in;
+}
+::view-transition-old(project-icon) {
+  animation: 120ms ease-out both vt-fade-out;
+}
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),

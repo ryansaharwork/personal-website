@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { RefObject } from "react";
 import type { Project } from "@/content/site";
+import { AppIcon } from "@/components/AppIcon";
 
 type Props = {
   projects: Project[];
@@ -51,6 +52,14 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
               style={{ backgroundImage: p.images.tile ? `url(${p.images.tile})` : p.art }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(11,10,9,.75))]" />
+            {/* App icon, centered just above the middle so it clears the label at every tile size. */}
+            {p.images.icon && (
+              <AppIcon
+                src={p.images.icon}
+                sizes="110px"
+                className="absolute top-[41%] left-1/2 h-[40%] -translate-x-1/2 -translate-y-1/2"
+              />
+            )}
             <div className="absolute right-3 bottom-3 left-3.5 lg:right-4 lg:bottom-4 lg:left-[18px]">
               <div className="hidden text-[11px] font-medium tracking-[.08em] text-cream/70 uppercase lg:block">{p.kicker}</div>
               <div className="font-display text-base leading-[1.05] font-bold tracking-[-.03em] lg:mt-[5px] lg:text-xl">{p.label}</div>
