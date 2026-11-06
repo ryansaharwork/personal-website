@@ -41,6 +41,8 @@ export type Project = {
     archNote: string;
     problems: Problem[];
     next: string;
+    /** Extra phone screenshots shown in a small gallery after "What it is". `hint` is the caption. */
+    gallery?: PhoneScreen[];
   };
 };
 
@@ -131,10 +133,11 @@ export const site = {
         { value: "146ms", label: "search" },
         { value: "26", label: "endpoints" },
       ],
+      // Left to right; the middle one sits in front. Screenshots are 804×1748 (2× the 402×874 frame).
       phones: [
-        { title: "Library", hint: "Search games", src: "" },
-        { title: "Profile", hint: "Search games", src: "" },
-        { title: "Reviews", hint: "Search reviews", src: "" },
+        { title: "Game page", hint: "Ratings, your review and who played it", src: "/images/valt-game.webp" },
+        { title: "Feed", hint: "Reviews from people you follow", src: "/images/valt-feed.webp" },
+        { title: "Review", hint: "A review with comments and likes", src: "/images/valt-review.webp" },
       ],
       writeup: {
         whatHead: "An iOS app for logging and reviewing the video games you play.",
@@ -147,6 +150,9 @@ export const site = {
         archNote: "The app only talks to the API — it never calls a third-party service directly.",
         problems: placeholderProblems(),
         next: "[A few lines on what you'd build or improve next.]",
+        gallery: [
+          { title: "Profile", hint: "Favorites, reviews and thoughts in one place", src: "/images/valt-profile.webp" },
+        ],
       },
     },
     {

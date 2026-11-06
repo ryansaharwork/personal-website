@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { Fragment } from "react";
 import type { Project } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
+import { IPhoneFrame } from "./IPhoneFrame";
 
 const label = "mb-5 text-xs font-medium tracking-[.08em] text-ember uppercase";
 const card = "rounded-[18px] border border-cream/10 bg-panel shadow-card";
@@ -16,6 +18,41 @@ export function WriteUp({ project }: { project: Project }) {
           <p className="text-[17px] leading-normal text-pretty text-muted md:pt-1.5 lg:text-[19px]">{w.what}</p>
         </div>
       </Reveal>
+
+      {w.gallery && w.gallery.length > 0 && (
+        <Reveal className="pt-14 lg:pt-[72px]">
+          <h2 className={label}>Screens</h2>
+          {/* Small framed phones, matching the fan in the hero. Scrolls sideways on phones if there are several. */}
+          <div className="no-scrollbar -mx-5 flex snap-x scroll-px-5 gap-8 overflow-x-auto px-5 pb-4 [--s:.42] md:mx-0 md:px-0 lg:gap-10 lg:[--s:.5]">
+            {w.gallery.map((s) => (
+              <figure key={s.title} className="flex-none snap-start">
+                <div
+                  className="[filter:drop-shadow(0_30px_45px_rgba(0,0,0,.6))]"
+                  style={{ width: "calc(402px * var(--s))", height: "calc(874px * var(--s))" }}
+                >
+                  <div className="w-[402px] origin-top-left" style={{ transform: "scale(var(--s))" }}>
+                    <IPhoneFrame statusBar={false}>
+                      <div className="relative h-full">
+                        <Image
+                          src={s.src}
+                          alt={`${project.title} — ${s.title} screen`}
+                          fill
+                          sizes="210px"
+                          className="object-cover"
+                        />
+                      </div>
+                    </IPhoneFrame>
+                  </div>
+                </div>
+                <figcaption className="mt-4 max-w-[calc(402px*var(--s))] text-sm leading-[1.45]">
+                  <span className="font-medium text-cream">{s.title}</span>
+                  <span className="block text-dim">{s.hint}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </Reveal>
+      )}
 
       <Reveal className="pt-14 lg:pt-[72px]">
         <h2 className={label}>Architecture</h2>
