@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { site, type Project } from "@/content/site";
 import { Nav } from "@/components/Nav";
+import { clearHomeReturn, peekHomeReturn } from "@/lib/homeReturn";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { IntroHero } from "./IntroHero";
 import { ProjectHero } from "./ProjectHero";
@@ -17,8 +18,12 @@ const LEAVE_DELAY = 300;
 export function ConsoleHome() {
   const router = useRouter();
   const reduced = useReducedMotion();
+  // Coming back from a project page (Esc / Home): start with that project selected, so its media is
+  // visible on the first render and the view transition can morph back into it.
+  const [initial] = useState(() => projects.findIndex((p) => p.slug === peekHomeReturn()));
+  useEffect(() => clearHomeReturn(), []);
   /** Sticky selection (arrow keys, tap, focus). */
-  const [sel, setSel] = useState(-1);
+  const [sel, setSel] = useState(initial);
   /** Mouse hover; overrides `sel` while set. Kept while the pointer stays over the hero or tiles. */
   const [hover, setHover] = useState(-1);
   const act = hover >= 0 ? hover : sel;
@@ -41,7 +46,7 @@ export function ConsoleHome() {
 
   // The project shown in the hero lags `act` so project → project can dip out,
   // swap text while invisible, and fade back in.
-  const [shown, setShown] = useState(0);
+  const [shown, setShown] = useState(Math.max(initial, 0));
   const [dip, setDip] = useState(false);
   const prevAct = useRef(-1);
   const tileRefs = useRef<(HTMLAnchorElement | null)[]>([]);

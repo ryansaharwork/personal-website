@@ -4,7 +4,7 @@ import { getProject, site, type Project } from "@/content/site";
 import { AppLink } from "@/components/AppLink";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Nav } from "@/components/Nav";
-import { PhoneFan } from "@/components/project/PhoneFan";
+import { ProjectMedia, ProjectTitle, hasProjectMedia } from "@/components/project/ProjectMedia";
 import { UpNext } from "@/components/project/UpNext";
 import { WriteUp } from "@/components/project/WriteUp";
 
@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: Params) {
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
 
         <div className="relative z-10 mx-auto max-w-site px-5 pt-5 lg:absolute lg:inset-x-0 lg:top-10 lg:px-14 lg:pt-0">
-          <Nav back />
+          <Nav back returnTo={project.slug} />
         </div>
 
         <div className="relative mx-auto grid max-w-site gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-0 lg:top-[110px] lg:bottom-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center lg:px-14 lg:py-0">
@@ -53,9 +53,11 @@ export default async function ProjectPage({ params }: Params) {
             <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[13px]">
               {project.kicker} · {project.year}
             </div>
-            <h1 className="mt-3 font-display text-[64px] leading-[.9] font-extrabold tracking-[-.05em] lg:mt-4 lg:text-[clamp(72px,7.2vw,104px)]">
-              {project.title}
-            </h1>
+            <ProjectTitle slug={project.slug}>
+              <h1 className="mt-3 w-fit font-display text-[64px] leading-[.9] font-extrabold tracking-[-.05em] lg:mt-4 lg:text-[clamp(72px,7.2vw,104px)]">
+                {project.title}
+              </h1>
+            </ProjectTitle>
             <p className="mt-5 text-[17px] leading-[1.45] text-pretty text-muted lg:mt-[22px] lg:text-xl">{project.long}</p>
             <div className="mt-[30px] flex flex-wrap items-start gap-3">
               {project.playUrl ? (
@@ -81,8 +83,8 @@ export default async function ProjectPage({ params }: Params) {
             </div>
           </div>
 
-          {project.phones.length > 0 ? (
-            <PhoneFan screens={project.phones} appName={project.title} />
+          {hasProjectMedia(project) ? (
+            <ProjectMedia project={project} />
           ) : (
             <div className="relative mx-auto aspect-[4/3] w-full max-w-[640px] overflow-hidden rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_40px_80px_-30px_rgba(0,0,0,.8)]">
               <ImageSlot src={project.images.hero} alt={`${project.title} hero art`} label={`${project.title} — hero art 4:3`} sizes="(min-width: 1024px) 640px, 100vw" priority />

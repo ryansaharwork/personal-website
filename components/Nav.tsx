@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { site } from "@/content/site";
+import { setHomeReturn } from "@/lib/homeReturn";
 
 type Props = {
   /** Home page: the name resets the console to the intro instead of navigating. */
@@ -11,27 +12,36 @@ type Props = {
   /** Subpages: show an "esc Home" link, and make Esc go home. */
   back?: boolean;
   active?: "about";
+  /** Project pages: going home (Esc / Home) returns to the homepage with this project selected. */
+  returnTo?: string;
 };
 
 const pill =
   "rounded-full border border-cream/22 bg-ink/35 px-3 py-[7px] text-cream backdrop-blur-md transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:px-4 lg:py-[9px]";
 
-export function Nav({ onNameClick, back, active }: Props) {
+export function Nav({ onNameClick, back, active, returnTo }: Props) {
   const router = useRouter();
 
   useEffect(() => {
     if (!back) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && !e.defaultPrevented) router.push("/");
+      if (e.key === "Escape" && !e.defaultPrevented) {
+        if (returnTo) setHomeReturn(returnTo);
+        router.push("/");
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [back, router]);
+  }, [back, router, returnTo]);
 
   return (
     <nav className="relative z-10 flex items-center justify-between gap-4 text-[13px] lg:text-sm">
       {back ? (
-        <Link href="/" className="flex items-center gap-2.5 text-muted transition-colors hover:text-cream">
+        <Link
+          href="/"
+          onClick={() => returnTo && setHomeReturn(returnTo)}
+          className="flex items-center gap-2.5 text-muted transition-colors hover:text-cream"
+        >
           <span className="kbd hidden sm:inline">esc</span>Home
         </Link>
       ) : (

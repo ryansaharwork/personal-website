@@ -128,3 +128,33 @@
     scroll-behavior: smooth;
   }
 }
+
+/* View transitions (homepage <-> project page). Shared elements (.morph: a project's media and title)
+   fly between their positions; everything else crossfades. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(root) {
+  animation-duration: 300ms;
+}
+::view-transition-group(.morph) {
+  animation-duration: 450ms;
+  animation-timing-function: var(--ease-soft);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-soften;
+  animation-duration: 450ms;
+}
+@keyframes vt-soften {
+  30% {
+    filter: blur(2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-image-pair(*) {
+    animation: none !important;
+  }
+}

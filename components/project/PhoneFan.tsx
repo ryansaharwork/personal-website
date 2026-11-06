@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { PhoneScreen } from "@/content/site";
 import { IPhoneFrame } from "./IPhoneFrame";
 
@@ -12,17 +12,50 @@ const FAN = [
   { r: 9, x: -60, s: 0.9, z: 1 },
 ];
 
+/** The fan's footprint at --s = 1, including the side phones' rotation and the hover lift. */
+const FOOTPRINT = { w: 1000, h: 920 };
+const MAX_S = 0.65;
+/** Below this the phones are too small to read, so a fitted fan hides instead. */
+const MIN_S = 0.14;
+
+type Props = {
+  screens: PhoneScreen[];
+  appName: string;
+  /** Scale to fill the parent element's box (the parent must not size itself from the fan). */
+  fit?: boolean;
+  /** Hover/tap lifts a phone and dims the others. Off for decorative copies. */
+  interactive?: boolean;
+};
+
 /**
  * Three phones, fanned with the middle one forward. The hovered (or tapped)
  * phone lifts in place, grows slightly and straightens; the others dim and ease back.
  */
-export function PhoneFan({ screens, appName }: { screens: PhoneScreen[]; appName: string }) {
+export function PhoneFan({ screens, appName, fit = false, interactive = true }: Props) {
   const [hot, setHot] = useState(-1);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    const box = el?.parentElement;
+    if (!fit || !el || !box) return;
+    const apply = () => {
+      const { width, height } = box.getBoundingClientRect();
+      const s = Math.min(height / FOOTPRINT.h, width / FOOTPRINT.w, MAX_S);
+      el.style.setProperty("--s", String(Math.max(s, MIN_S)));
+      el.style.visibility = s < MIN_S ? "hidden" : "";
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(box);
+    return () => ro.disconnect();
+  }, [fit]);
 
   return (
     <div
-      className="flex items-end justify-center [--s:.36] sm:[--s:.5] lg:[--s:.42] xl:[--s:.55] min-[1360px]:[--s:.65]"
-      onPointerLeave={(e) => e.pointerType === "mouse" && setHot(-1)}
+      ref={ref}
+      className={`flex items-end justify-center ${fit ? "" : "[--s:.36] sm:[--s:.5] lg:[--s:.42] xl:[--s:.55] min-[1360px]:[--s:.65]"}`}
+      onPointerLeave={interactive ? (e) => e.pointerType === "mouse" && setHot(-1) : undefined}
     >
       {screens.slice(0, 3).map((screen, i) => {
         const b = FAN[i];
@@ -32,9 +65,9 @@ export function PhoneFan({ screens, appName }: { screens: PhoneScreen[]; appName
         return (
           <div
             key={screen.title}
-            onPointerEnter={(e) => e.pointerType === "mouse" && setHot(i)}
-            onClick={() => setHot((v) => (v === i ? -1 : i))}
-            className="relative flex-none cursor-pointer transition-[transform,opacity] duration-[350ms] ease-soft [transform-origin:50%_100%] [filter:drop-shadow(0_40px_60px_rgba(0,0,0,.7))] motion-reduce:transform-none! motion-reduce:transition-[opacity]"
+            onPointerEnter={interactive ? (e) => e.pointerType === "mouse" && setHot(i) : undefined}
+            onClick={interactive ? () => setHot((v) => (v === i ? -1 : i)) : undefined}
+            className={`relative flex-none transition-[transform,opacity] duration-[350ms] ease-soft [transform-origin:50%_100%] [filter:drop-shadow(0_40px_60px_rgba(0,0,0,.7))] motion-reduce:transform-none! motion-reduce:transition-[opacity] ${interactive ? "cursor-pointer" : ""}`}
             style={{
               width: "calc(402px * var(--s))",
               height: "calc(874px * var(--s))",

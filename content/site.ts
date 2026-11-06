@@ -124,7 +124,7 @@ export const site = {
       label: "Valt",
       title: "Valt",
       kicker: "iOS app",
-      year: "2025",
+      year: "2026",
       desc: "A SwiftUI app, a 26-endpoint TypeScript API and a Postgres database on AWS — built solo in three months.",
       long: "A SwiftUI client with zero third-party libraries, a 26-endpoint TypeScript API and a Postgres database on AWS — 11.5K lines in three months, from auth to search.",
       art: "linear-gradient(135deg,oklch(42% .15 40),oklch(22% .06 35) 60%,#120e0b)",
