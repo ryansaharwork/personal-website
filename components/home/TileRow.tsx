@@ -45,20 +45,21 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
                 onSelect(i);
               }
             }}
-            className="animate-rise group relative h-[160px] w-[130px] flex-none snap-start overflow-hidden rounded-[18px] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-ember-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[240px] lg:w-auto lg:min-w-[160px] lg:flex-1 lg:basis-0 lg:rounded-[22px]"
+            className="animate-rise group @container relative h-[160px] w-[130px] flex-none snap-start overflow-hidden rounded-[18px] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-ember-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[240px] lg:w-auto lg:min-w-[160px] lg:flex-1 lg:basis-0 lg:rounded-[22px]"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-[scale] duration-[1400ms] ease-soft motion-safe:group-data-[active=true]:scale-110"
               style={{ backgroundImage: p.images.tile ? `url(${p.images.tile})` : p.art }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(11,10,9,.75))]" />
-            {/* App icon, centered just above the middle so it clears the label at every tile size. */}
+            {/* App icon, centered in the space above the label. No percentage heights/offsets (Safari resolves
+                those against an aspect-ratio height inconsistently): a flex container centers it, the bottom padding
+                keeps the label clear, and the size is explicit. On desktop the tile is square up to 240px tall, so
+                min(40cqw, 96px) is 40% of the tile's height; phone tiles are a fixed 160px tall. */}
             {p.images.icon && (
-              <AppIcon
-                src={p.images.icon}
-                sizes="110px"
-                className="absolute top-[41%] left-1/2 h-[40%] -translate-x-1/2 -translate-y-1/2"
-              />
+              <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center pb-7 lg:pb-12">
+                <AppIcon src={p.images.icon} sizes="110px" className="size-16 flex-none lg:size-[min(40cqw,96px)]" />
+              </div>
             )}
             <div className="absolute right-3 bottom-3 left-3.5 lg:right-4 lg:bottom-4 lg:left-[18px]">
               <div className="hidden text-[11px] font-medium tracking-[.08em] text-cream/70 uppercase lg:block">{p.kicker}</div>
