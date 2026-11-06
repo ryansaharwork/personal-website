@@ -15,10 +15,11 @@ export function WriteUp({ project }: { project: Project }) {
         <h2 className={label}>What it is</h2>
         <div className="grid gap-5 md:grid-cols-2 md:gap-10">
           <p className="font-display text-[30px] leading-[1.02] font-bold tracking-[-.04em] text-pretty lg:text-[40px]">{w.whatHead}</p>
-          <div>
-            <p className="text-[17px] leading-normal text-pretty text-muted md:pt-1.5 lg:text-[19px]">{w.what}</p>
-            {w.whatScreen && <WhatScreen screen={w.whatScreen} appName={project.title} />}
-          </div>
+          {/* Phones: headline, text, phone. Wider: text spans the right column; the phone sits under the headline. */}
+          <p className="text-[17px] leading-normal text-pretty text-muted md:col-start-2 md:row-span-2 md:row-start-1 md:self-start md:pt-1.5 lg:text-[19px]">
+            {w.what}
+          </p>
+          {w.whatScreen && <WhatScreen screen={w.whatScreen} appName={project.title} />}
         </div>
       </Reveal>
 
@@ -71,10 +72,10 @@ export function WriteUp({ project }: { project: Project }) {
   );
 }
 
-/** A small framed phone under the "What it is" text, matching the fan in the hero. */
+/** A small framed phone under the "What it is" headline, matching the fan in the hero. */
 function WhatScreen({ screen, appName }: { screen: PhoneScreen; appName: string }) {
   return (
-    <figure className="mt-8 [--s:.42] lg:mt-10 lg:[--s:.5]">
+    <figure className="mt-3 [--s:.42] md:col-start-1 md:row-start-2 md:mt-0 lg:[--s:.5]">
       <div
         className="[filter:drop-shadow(0_30px_45px_rgba(0,0,0,.6))]"
         style={{ width: "calc(402px * var(--s))", height: "calc(874px * var(--s))" }}

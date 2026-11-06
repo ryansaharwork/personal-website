@@ -41,7 +41,7 @@ export type Project = {
     archNote: string;
     problems: Problem[];
     next: string;
-    /** Optional phone screenshot in the right column of "What it is", under the text. `hint` is the caption. */
+    /** Optional phone screenshot in "What it is", under the headline (after the text on phones). `hint` is the caption. */
     whatScreen?: PhoneScreen;
   };
 };

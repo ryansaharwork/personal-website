@@ -12,7 +12,7 @@ Everything on the site lives in **`content/site.ts`**: bio, links, skills, exper
   - `projects[].images.tile`: home-screen tile art (square)
   - `projects[].images.hero`: full-screen background on the home screen and the hero image on the project page (4:3)
   - `projects[].phones[].src`: Valt's three phone screenshots, left to right (402×874 aspect; use 804×1748 for sharp 2× display). The frame draws a 9:41 status bar on top, so remove the screenshot's own.
-  - `projects[].writeup.whatScreen`: optional phone screenshot under the "What it is" text, same size and aspect as `phones`
+  - `projects[].writeup.whatScreen`: optional phone screenshot under the "What it is" headline (after the text on phones), same size and aspect as `phones`
 - `links.resume` is a placeholder (`#`) until the web résumé exists.
 - Adding a project to `projects` adds its tile, its page at `/projects/<slug>`, and its "Up next" card.
 
