@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProject, site, type Project } from "@/content/site";
-import { AppIcon } from "@/components/AppIcon";
 import { AppLink } from "@/components/AppLink";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Nav } from "@/components/Nav";
-import { ProjectMedia, ProjectTitle, hasProjectMedia } from "@/components/project/ProjectMedia";
+import { ProjectMedia, TitleLockup, hasProjectMedia } from "@/components/project/ProjectMedia";
 import { UpNext } from "@/components/project/UpNext";
 import { WriteUp } from "@/components/project/WriteUp";
 
@@ -54,21 +53,7 @@ export default async function ProjectPage({ params }: Params) {
             <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[13px]">
               {project.kicker} · {project.year}
             </div>
-            {/* The icon sits beside the title, outside the morphing title element. Its own fixed view-transition
-                name keeps it out of the page snapshot, so CSS can fade it in only as the title lands (and out first
-                when leaving), and the flying title never passes over it. */}
-            <div className="mt-3 flex items-center gap-3.5 lg:mt-4 lg:gap-5">
-              {project.images.icon && (
-                <span className="flex-none" style={{ viewTransitionName: "project-icon" }}>
-                  <AppIcon src={project.images.icon} sizes="64px" className="size-14 lg:size-16" />
-                </span>
-              )}
-              <ProjectTitle slug={project.slug}>
-                <h1 className="w-fit font-display text-[64px] leading-[.9] font-extrabold tracking-[-.05em] lg:text-[clamp(72px,7.2vw,104px)]">
-                  {project.title}
-                </h1>
-              </ProjectTitle>
-            </div>
+            <TitleLockup project={project} as="h1" className="mt-3 text-[64px] lg:mt-4 lg:text-[clamp(72px,7.2vw,104px)]" />
             <p className="mt-5 text-[17px] leading-[1.45] text-pretty text-muted lg:mt-[22px] lg:text-xl">{project.long}</p>
             <div className="mt-[30px] flex flex-wrap items-start gap-3">
               {project.playUrl ? (

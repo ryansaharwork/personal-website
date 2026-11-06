@@ -129,7 +129,7 @@
   }
 }
 
-/* View transitions (homepage <-> project page). A project's media and title (.morph-media / .morph-title)
+/* View transitions (homepage <-> project page). A project's media and title lockup (.morph-media / .morph-lockup)
    move and scale as a single snapshot; the rest of the page does a short, subtle fade.
    Kept cheap for Safari: no filters, no crossfade between old and new snapshots, no shadows inside them. */
 :root {
@@ -159,18 +159,22 @@
   }
 }
 ::view-transition-group(.morph-media),
-::view-transition-group(.morph-title) {
+::view-transition-group(.morph-lockup) {
   animation-duration: 500ms;
   animation-timing-function: var(--ease-spring);
+}
+/* If the two ever cross mid-flight, the title stays on top. */
+::view-transition-group(.morph-lockup) {
+  z-index: 2;
 }
 /* Show only the destination snapshot (no ghosting) and never stretch it: both pages give these elements
    the same shape, and object-fit keeps any rounding difference from warping. */
 ::view-transition-old(.morph-media),
-::view-transition-old(.morph-title) {
+::view-transition-old(.morph-lockup) {
   display: none;
 }
 ::view-transition-new(.morph-media),
-::view-transition-new(.morph-title) {
+::view-transition-new(.morph-lockup) {
   animation: none;
   height: 100%;
   object-fit: contain;
@@ -178,17 +182,23 @@
 ::view-transition-new(.morph-media) {
   object-position: center bottom;
 }
-::view-transition-new(.morph-title) {
-  object-position: left bottom;
+::view-transition-new(.morph-lockup) {
+  object-position: left center;
 }
-/* Project-page app icon: appears after the title morph has mostly landed; leaves before it moves. */
-::view-transition-new(project-icon) {
-  animation: 220ms ease-out 320ms both vt-fade-in;
+/* The title lockup's icon shadow lives outside the morphing element. Hide it instantly while any view
+   transition runs (so neither snapshot has it at a stale position), then fade it back in after landing.
+   The transition is declared only on the resting state, so hiding is instant and showing is animated. */
+.lockup-shadow {
+  transition: opacity 250ms ease-out;
 }
-::view-transition-old(project-icon) {
-  animation: 120ms ease-out both vt-fade-out;
+:root:active-view-transition .lockup-shadow {
+  opacity: 0;
+  transition: none;
 }
 @media (prefers-reduced-motion: reduce) {
+  .lockup-shadow {
+    transition: none;
+  }
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*),

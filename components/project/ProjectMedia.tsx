@@ -1,11 +1,12 @@
 import { ViewTransition } from "react";
 import type { Project } from "@/content/site";
+import { AppIcon, ICON_SHADOW } from "@/components/AppIcon";
 import { ImageSlot } from "@/components/ImageSlot";
 import { PhoneFan } from "./PhoneFan";
 
 /** Shared-element names: the same name on the homepage hero and the project page makes them morph. */
 const mediaName = (slug: string) => `project-media-${slug}`;
-const titleName = (slug: string) => `project-title-${slug}`;
+const lockupName = (slug: string) => `project-lockup-${slug}`;
 
 export function hasProjectMedia(project: Project) {
   return project.phones.length > 0 || Boolean(project.images.hero);
@@ -63,11 +64,43 @@ export function ProjectMedia({ project, fit = false, named = true }: MediaProps)
   );
 }
 
-/** Wraps a project's title element so it morphs between the homepage hero and the project page. */
-export function ProjectTitle({ slug, named = true, children }: { slug: string; named?: boolean; children: React.ReactNode }) {
+/**
+ * A project's title lockup: its app icon (if any) and title, sized entirely in em from one font size. The
+ * homepage hero and the project page render it at different font sizes, so the two are exact scaled copies
+ * with the same aspect ratio, and the whole lockup morphs as one shared element. The icon's shadow is drawn
+ * by a separate layer outside the named element (so the morphing snapshot stays shadow-free), hidden while a
+ * view transition runs and faded back in once the lockup has landed (see .lockup-shadow in globals.css).
+ */
+export function TitleLockup({
+  project,
+  as: Heading,
+  className = "",
+  named = true,
+}: {
+  project: Project;
+  as: "h1" | "h2";
+  /** Font size (which scales everything) and outer margins. */
+  className?: string;
+  named?: boolean;
+}) {
+  const icon = project.images.icon;
   return (
-    <ViewTransition name={named ? titleName(slug) : undefined} share="morph-title" default="none">
-      {children}
-    </ViewTransition>
+    <div className={`relative w-fit ${className}`}>
+      {icon && (
+        <span
+          aria-hidden
+          className={`lockup-shadow pointer-events-none absolute top-1/2 left-0 size-[0.62em] -translate-y-1/2 rounded-[22.37%] ${ICON_SHADOW}`}
+        />
+      )}
+      {/* default="none": only the cross-page morph (share) animates, not every unrelated transition. */}
+      <ViewTransition name={named ? lockupName(project.slug) : undefined} share="morph-lockup" default="none">
+        {/* Explicit em height: WebKit rounds text line boxes to whole pixels, which would skew the
+            aspect ratio between the two sizes. */}
+        <div className="relative flex h-[0.9em] w-fit items-center gap-[0.2em]">
+          {icon && <AppIcon src={icon} sizes="80px" shadow={false} className="size-[0.62em] flex-none" />}
+          <Heading className="font-display text-[1em] leading-[.9] font-extrabold tracking-[-.05em]">{project.title}</Heading>
+        </div>
+      </ViewTransition>
+    </div>
   );
 }
