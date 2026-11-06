@@ -17,7 +17,6 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
   return (
     <nav
       aria-label="Projects"
-      onMouseLeave={() => onHover(-1)}
       className="no-scrollbar relative z-10 flex snap-x scroll-px-5 items-end gap-3 overflow-x-auto px-5 pt-8 pb-12 lg:scroll-px-14 lg:gap-4 lg:px-14 lg:pt-10 lg:pb-[clamp(32px,7svh,64px)]"
     >
       {projects.map((p, i) => {

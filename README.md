@@ -29,7 +29,7 @@ Import the repo in Vercel. It detects Next.js, so no extra configuration is need
 
 ## Interaction notes
 
-- Home opens on the intro with no tile selected. Hovering a tile swaps the hero, and leaving the row returns to the intro.
+- Home opens on the intro with no tile selected. Hovering a tile swaps the hero. The project stays shown while the pointer is anywhere over the hero or the tiles, so its button is reachable, and fades back to the intro about 300ms after the pointer leaves that area.
 - ← → make a sticky selection, ↵ opens it and Esc returns to the intro. On project and About pages, Esc goes home.
 - On touch screens, the first tap highlights a tile and the second opens it. Tapping a phone or timeline row highlights it.
 - With `prefers-reduced-motion`, all movement (lift, zoom, fan, slide-in) is turned off. Only opacity and colour changes remain.

@@ -11,14 +11,33 @@ import { TileRow } from "./TileRow";
 
 const projects: Project[] = site.projects;
 
+/** How long the pointer can be outside the hero + tiles before the intro returns. */
+const LEAVE_DELAY = 300;
+
 export function ConsoleHome() {
   const router = useRouter();
   const reduced = useReducedMotion();
   /** Sticky selection (arrow keys, tap, focus). */
   const [sel, setSel] = useState(-1);
-  /** Mouse hover over the row; overrides `sel` while set. */
+  /** Mouse hover; overrides `sel` while set. Kept while the pointer stays over the hero or tiles. */
   const [hover, setHover] = useState(-1);
   const act = hover >= 0 ? hover : sel;
+  const leaveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const cancelLeave = useCallback(() => {
+    clearTimeout(leaveTimer.current);
+    leaveTimer.current = undefined;
+  }, []);
+
+  useEffect(() => cancelLeave, [cancelLeave]);
+
+  const hoverTile = useCallback(
+    (i: number) => {
+      cancelLeave();
+      setHover(i);
+    },
+    [cancelLeave],
+  );
 
   // The project shown in the hero lags `act` so project → project can dip out,
   // swap text while invisible, and fade back in.
@@ -51,10 +70,11 @@ export function ConsoleHome() {
   const open = useCallback((i: number) => router.push(`/projects/${projects[i].slug}`), [router]);
 
   const goIntro = useCallback(() => {
+    cancelLeave();
     setSel(-1);
     setHover(-1);
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-  }, []);
+  }, [cancelLeave]);
 
   const select = useCallback((i: number) => {
     setSel(i);
@@ -69,6 +89,7 @@ export function ConsoleHome() {
       const n = projects.length;
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         e.preventDefault();
+        cancelLeave();
         setHover(-1);
         const d = e.key === "ArrowRight" ? 1 : -1;
         select(sel < 0 ? (d > 0 ? 0 : n - 1) : (sel + d + n) % n);
@@ -84,14 +105,14 @@ export function ConsoleHome() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, select, open, goIntro]);
+  }, [sel, select, open, goIntro, cancelLeave]);
 
   const heroOn = act >= 0;
 
   return (
-    <main className="relative flex h-svh min-h-[600px] flex-col overflow-hidden lg:min-h-[760px]">
-      {/* Full-screen art: one layer per state, crossfaded. */}
-      <div aria-hidden className="absolute inset-0">
+    <main data-home className="relative flex h-svh min-h-[600px] flex-col overflow-hidden lg:min-h-[760px]">
+      {/* Full-screen art: one layer per state, crossfaded. Fixed so it fills the whole viewport. */}
+      <div aria-hidden className="fixed inset-0">
         <BgLayer art={site.introArt} on={!heroOn} />
         {projects.map((p, i) => (
           <BgLayer key={p.slug} art={p.art} image={p.images.hero} on={act === i} />
@@ -99,26 +120,37 @@ export function ConsoleHome() {
       </div>
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,10,9,.3),rgba(11,10,9,.6)_45%,rgba(11,10,9,.96)_70%)] lg:bg-[radial-gradient(ellipse_at_50%_120%,rgba(11,10,9,.95),rgba(11,10,9,.55)_45%,transparent_75%)]"
+        className="fixed inset-0 bg-[linear-gradient(180deg,rgba(11,10,9,.3),rgba(11,10,9,.6)_45%,rgba(11,10,9,.96)_70%)] lg:bg-[radial-gradient(ellipse_at_50%_120%,rgba(11,10,9,.95),rgba(11,10,9,.55)_45%,transparent_75%)]"
       />
 
       <div className="relative z-10 px-5 pt-5 lg:px-14 lg:pt-10">
         <Nav onNameClick={goIntro} />
       </div>
 
-      <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(24px,8svh,70px)] lg:mb-2">
-        <IntroHero visible={!heroOn} />
-        <ProjectHero project={projects[shown]} visible={heroOn && !dip} onOpen={() => open(shown)} />
-      </div>
+      {/* Hover region: a hovered project stays shown while the mouse is anywhere over the hero or tiles. */}
+      <div
+        className="flex min-h-0 flex-1 flex-col"
+        onPointerEnter={(e) => e.pointerType === "mouse" && cancelLeave()}
+        onPointerLeave={(e) => {
+          if (e.pointerType !== "mouse") return;
+          cancelLeave();
+          leaveTimer.current = setTimeout(() => setHover(-1), LEAVE_DELAY);
+        }}
+      >
+        <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(24px,8svh,70px)] lg:mb-2">
+          <IntroHero visible={!heroOn} />
+          <ProjectHero project={projects[shown]} visible={heroOn && !dip} onOpen={() => open(shown)} />
+        </div>
 
-      <TileRow
-        projects={projects}
-        active={act}
-        tileRefs={tileRefs}
-        onHover={setHover}
-        onFocusTile={setSel}
-        onSelect={setSel}
-      />
+        <TileRow
+          projects={projects}
+          active={act}
+          tileRefs={tileRefs}
+          onHover={hoverTile}
+          onFocusTile={setSel}
+          onSelect={setSel}
+        />
+      </div>
     </main>
   );
 }
