@@ -140,16 +140,29 @@ export const site = {
         { title: "Review", hint: "A review with comments and likes", src: "/images/valt-review.webp" },
       ],
       writeup: {
-        whatHead: "An iOS app for logging and reviewing the video games you play.",
-        what: "[Two sentences: the problem Valt solves and who it's for.]",
+        whatHead: "One place for every gamer's opinion.",
+        what: "Film fans have Letterboxd. Gamers are split across PlayStation, Xbox, Nintendo and PC, with no shared place to talk about what they play. Valt brings them together: log the games you play, rate and review them, and follow friends to see what they think. Players get a voice, and hear from each other instead of only from critics.",
         arch: [
           { title: "SwiftUI app", detail: "No third-party libraries · Keychain token storage" },
           { title: "TypeScript API", detail: "Express · Prisma · 26 endpoints · JWT auth" },
           { title: "Postgres on AWS RDS", detail: "IGDB data proxied and cached server-side" },
         ],
         archNote: "The app only talks to the API — it never calls a third-party service directly.",
-        problems: placeholderProblems(),
-        next: "[A few lines on what you'd build or improve next.]",
+        problems: [
+          {
+            title: "Auth from scratch",
+            body: "Instead of using an auth service, I built the whole flow myself: argon2id password hashing, JWTs issued by the API, tokens stored in the iOS Keychain, and validated every time the app launches.",
+          },
+          {
+            title: "Search: 2s → 146ms",
+            body: "Game search took about two seconds. Profiling the endpoint showed users were waiting on a 20-row database write they didn't need. I moved that write off the response path, and search dropped to 146ms.",
+          },
+          {
+            title: "The duplicate feed page",
+            body: "Editing a review mid-scroll could make the feed serve an entire page twice. I reproduced the bug on purpose to prove the cause, fixed it, then reran the same test to confirm the fix.",
+          },
+        ],
+        next: "Launch on the App Store, then build smart search: tell Valt what you're in the mood for, and it finds games that match your taste and helps you learn more about the games you love.",
         whatScreen: { title: "Profile", hint: "Favorites, reviews and thoughts in one place", src: "/images/valt-profile.webp" },
       },
     },
