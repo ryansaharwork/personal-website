@@ -45,7 +45,7 @@ export function PhoneFan({ screens, appName }: { screens: PhoneScreen[]; appName
             }}
           >
             <div className="w-[402px] origin-top-left" style={{ transform: "scale(var(--s))" }}>
-              <IPhoneFrame statusBar={!screen.src}>
+              <IPhoneFrame>
                 {screen.src ? (
                   <div className="relative h-full">
                     <Image src={screen.src} alt={`${appName} — ${screen.title} screen`} fill sizes="262px" className="object-cover" />

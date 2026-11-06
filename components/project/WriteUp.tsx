@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Fragment } from "react";
-import type { Project } from "@/content/site";
+import type { PhoneScreen, Project } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
 import { IPhoneFrame } from "./IPhoneFrame";
 
@@ -15,44 +15,12 @@ export function WriteUp({ project }: { project: Project }) {
         <h2 className={label}>What it is</h2>
         <div className="grid gap-5 md:grid-cols-2 md:gap-10">
           <p className="font-display text-[30px] leading-[1.02] font-bold tracking-[-.04em] text-pretty lg:text-[40px]">{w.whatHead}</p>
-          <p className="text-[17px] leading-normal text-pretty text-muted md:pt-1.5 lg:text-[19px]">{w.what}</p>
+          <div>
+            <p className="text-[17px] leading-normal text-pretty text-muted md:pt-1.5 lg:text-[19px]">{w.what}</p>
+            {w.whatScreen && <WhatScreen screen={w.whatScreen} appName={project.title} />}
+          </div>
         </div>
       </Reveal>
-
-      {w.gallery && w.gallery.length > 0 && (
-        <Reveal className="pt-14 lg:pt-[72px]">
-          <h2 className={label}>Screens</h2>
-          {/* Small framed phones, matching the fan in the hero. Scrolls sideways on phones if there are several. */}
-          <div className="no-scrollbar -mx-5 flex snap-x scroll-px-5 gap-8 overflow-x-auto px-5 pb-4 [--s:.42] md:mx-0 md:px-0 lg:gap-10 lg:[--s:.5]">
-            {w.gallery.map((s) => (
-              <figure key={s.title} className="flex-none snap-start">
-                <div
-                  className="[filter:drop-shadow(0_30px_45px_rgba(0,0,0,.6))]"
-                  style={{ width: "calc(402px * var(--s))", height: "calc(874px * var(--s))" }}
-                >
-                  <div className="w-[402px] origin-top-left" style={{ transform: "scale(var(--s))" }}>
-                    <IPhoneFrame statusBar={false}>
-                      <div className="relative h-full">
-                        <Image
-                          src={s.src}
-                          alt={`${project.title} — ${s.title} screen`}
-                          fill
-                          sizes="210px"
-                          className="object-cover"
-                        />
-                      </div>
-                    </IPhoneFrame>
-                  </div>
-                </div>
-                <figcaption className="mt-4 max-w-[calc(402px*var(--s))] text-sm leading-[1.45]">
-                  <span className="font-medium text-cream">{s.title}</span>
-                  <span className="block text-dim">{s.hint}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </Reveal>
-      )}
 
       <Reveal className="pt-14 lg:pt-[72px]">
         <h2 className={label}>Architecture</h2>
@@ -100,5 +68,29 @@ export function WriteUp({ project }: { project: Project }) {
         </div>
       </Reveal>
     </div>
+  );
+}
+
+/** A small framed phone under the "What it is" text, matching the fan in the hero. */
+function WhatScreen({ screen, appName }: { screen: PhoneScreen; appName: string }) {
+  return (
+    <figure className="mt-8 [--s:.42] lg:mt-10 lg:[--s:.5]">
+      <div
+        className="[filter:drop-shadow(0_30px_45px_rgba(0,0,0,.6))]"
+        style={{ width: "calc(402px * var(--s))", height: "calc(874px * var(--s))" }}
+      >
+        <div className="w-[402px] origin-top-left" style={{ transform: "scale(var(--s))" }}>
+          <IPhoneFrame>
+            <div className="relative h-full">
+              <Image src={screen.src} alt={`${appName} — ${screen.title} screen`} fill sizes="210px" className="object-cover" />
+            </div>
+          </IPhoneFrame>
+        </div>
+      </div>
+      <figcaption className="mt-4 max-w-[calc(402px*var(--s))] text-sm leading-[1.45]">
+        <span className="font-medium text-cream">{screen.title}</span>
+        <span className="block text-dim">{screen.hint}</span>
+      </figcaption>
+    </figure>
   );
 }

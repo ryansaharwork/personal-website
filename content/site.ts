@@ -41,8 +41,8 @@ export type Project = {
     archNote: string;
     problems: Problem[];
     next: string;
-    /** Extra phone screenshots shown in a small gallery after "What it is". `hint` is the caption. */
-    gallery?: PhoneScreen[];
+    /** Optional phone screenshot in the right column of "What it is", under the text. `hint` is the caption. */
+    whatScreen?: PhoneScreen;
   };
 };
 
@@ -150,9 +150,7 @@ export const site = {
         archNote: "The app only talks to the API — it never calls a third-party service directly.",
         problems: placeholderProblems(),
         next: "[A few lines on what you'd build or improve next.]",
-        gallery: [
-          { title: "Profile", hint: "Favorites, reviews and thoughts in one place", src: "/images/valt-profile.webp" },
-        ],
+        whatScreen: { title: "Profile", hint: "Favorites, reviews and thoughts in one place", src: "/images/valt-profile.webp" },
       },
     },
     {

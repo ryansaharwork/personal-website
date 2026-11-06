@@ -1,12 +1,12 @@
 /**
  * iPhone bezel at 402×874 (dynamic island, status bar, home indicator). Scale it from the outside.
- * Turn `statusBar` off for real screenshots, which already include their own.
+ * It draws a clean 9:41 status bar on top, so screenshots should have theirs removed.
  */
-export function IPhoneFrame({ children, statusBar = true }: { children: React.ReactNode; statusBar?: boolean }) {
+export function IPhoneFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative h-[874px] w-[402px] overflow-hidden rounded-[48px] bg-black shadow-[0_40px_80px_rgba(0,0,0,.18),0_0_0_1px_rgba(0,0,0,.12)]">
       <div className="absolute top-[11px] left-1/2 z-50 h-[37px] w-[126px] -translate-x-1/2 rounded-3xl bg-black" />
-      {statusBar && <StatusBar />}
+      <StatusBar />
       <div className="h-full">{children}</div>
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[60] flex h-[34px] items-end justify-center pb-2">
         <div className="h-[5px] w-[139px] rounded-full bg-white/70" />
