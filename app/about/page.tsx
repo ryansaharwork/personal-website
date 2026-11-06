@@ -20,6 +20,9 @@ export default function AboutPage() {
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_25%,oklch(45%_.14_45/.4),transparent_50%),radial-gradient(ellipse_at_95%_95%,oklch(32%_.06_60/.5),transparent_45%)]"
       />
+      {/* Solid ink at the very top and bottom, so the overscroll area continues the page. */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-32 edge-fade-bottom lg:h-44" />
       <div className="relative px-5 pt-5 lg:px-14 lg:pt-10">
         <Nav back active="about" />
       </div>

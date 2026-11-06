@@ -110,7 +110,7 @@ export function ConsoleHome() {
   const heroOn = act >= 0;
 
   return (
-    <main data-home className="relative flex h-svh min-h-[600px] flex-col overflow-hidden lg:min-h-[760px]">
+    <main className="relative flex h-svh min-h-[600px] flex-col overflow-hidden lg:min-h-[760px]">
       {/* Full-screen art: one layer per state, crossfaded. Fixed so it fills the whole viewport. */}
       <div aria-hidden className="fixed inset-0">
         <BgLayer art={site.introArt} on={!heroOn} />
@@ -122,6 +122,9 @@ export function ConsoleHome() {
         aria-hidden
         className="fixed inset-0 bg-[linear-gradient(180deg,rgba(11,10,9,.3),rgba(11,10,9,.6)_45%,rgba(11,10,9,.96)_70%)] lg:bg-[radial-gradient(ellipse_at_50%_120%,rgba(11,10,9,.95),rgba(11,10,9,.55)_45%,transparent_75%)]"
       />
+      {/* Solid ink at the very top and bottom, so the overscroll area continues the page. */}
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 h-28 edge-fade-top lg:h-40" />
+      <div aria-hidden className="pointer-events-none fixed inset-x-0 bottom-0 h-24 edge-fade-bottom lg:h-32" />
 
       <div className="relative z-10 px-5 pt-5 lg:px-14 lg:pt-10">
         <Nav onNameClick={goIntro} />

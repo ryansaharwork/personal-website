@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  /* Page background. Also every page's top/bottom edge, html/body background-color and theme-color,
+     so Safari's overscroll area and toolbar tint continue the page seamlessly. */
   --color-ink: #0b0a09;
-  /* Top stop of the homepage background (site.introArt). */
-  --color-intro-top: #14100d;
   --color-panel: #17140f;
   --color-cream: #f1ebe3;
   --color-muted: #c7bdb2;
@@ -50,6 +50,28 @@
   color: var(--color-muted);
 }
 
+/* Fade page art into solid ink at the top/bottom edge. Gradients only, never background-color:
+   Safari 26 tints its toolbar from full-width fixed layers that have a background-color. */
+@utility edge-fade-top {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-ink) 0 4px,
+    rgb(11 10 9 / 0.85) 30%,
+    rgb(11 10 9 / 0.45) 65%,
+    rgb(11 10 9 / 0)
+  );
+}
+
+@utility edge-fade-bottom {
+  background-image: linear-gradient(
+    0deg,
+    var(--color-ink) 0 4px,
+    rgb(11 10 9 / 0.85) 30%,
+    rgb(11 10 9 / 0.45) 65%,
+    rgb(11 10 9 / 0)
+  );
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -59,18 +81,13 @@
 
 @layer base {
   html {
-    background: var(--color-ink);
+    background-color: var(--color-ink);
     color: var(--color-cream);
     -webkit-font-smoothing: antialiased;
   }
   body {
-    background: var(--color-ink);
+    background-color: var(--color-ink);
     font-family: var(--font-sans);
-  }
-  /* Home: match the top of the page so Safari's overscroll area blends in. */
-  html:has([data-home]),
-  html:has([data-home]) body {
-    background: var(--color-intro-top);
   }
   ::selection {
     background: oklch(76% 0.16 45 / 0.35);

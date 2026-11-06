@@ -40,6 +40,8 @@ export default async function ProjectPage({ params }: Params) {
           </div>
         )}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_72%_50%,oklch(55%_.16_45/.22),transparent_55%),linear-gradient(90deg,rgba(11,10,9,.85)_0%,rgba(11,10,9,.5)_50%,rgba(11,10,9,.15)_100%),linear-gradient(0deg,#0b0a09,transparent_30%)]" />
+        {/* Solid ink at the very top, so the overscroll area continues the page. */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
 
         <div className="relative z-10 px-5 pt-5 lg:absolute lg:inset-x-14 lg:top-10 lg:px-0 lg:pt-0">
           <Nav back />
