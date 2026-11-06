@@ -1,4 +1,5 @@
 import type { Project } from "@/content/site";
+import { AppLink } from "@/components/AppLink";
 
 type Props = { project: Project; visible: boolean; onOpen: () => void };
 
@@ -17,7 +18,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
           {project.title}
         </h2>
         <p className="mt-3 text-base leading-[1.4] text-pretty text-muted lg:mt-[18px] lg:text-[21px]">{project.desc}</p>
-        <div className="mt-[18px] flex items-center gap-3 lg:mt-[26px]">
+        <div className="mt-[18px] flex items-start gap-3 lg:mt-[26px]">
           <button
             type="button"
             onClick={onOpen}
@@ -25,7 +26,13 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
           >
             {project.playUrl ? "Play now" : "Read the write-up"}
           </button>
-          <span className="hidden items-center gap-1.5 text-[13px] text-dim [@media(hover:hover)]:flex">
+          {project.appLink && (
+            <AppLink
+              link={project.appLink}
+              className="inline-flex rounded-full border border-cream/22 bg-ink/35 px-3.5 py-[9px] text-sm text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:px-[18px] lg:py-[11px] lg:text-[15px]"
+            />
+          )}
+          <span className="hidden h-10 items-center gap-1.5 text-[13px] text-dim lg:h-11 [@media(hover:hover)]:flex">
             <span className="kbd">↵</span>open · <span className="kbd">esc</span>back
           </span>
         </div>

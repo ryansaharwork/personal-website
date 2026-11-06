@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProject, site, type Project } from "@/content/site";
+import { AppLink } from "@/components/AppLink";
 import { ImageSlot } from "@/components/ImageSlot";
 import { Nav } from "@/components/Nav";
 import { PhoneFan } from "@/components/project/PhoneFan";
@@ -56,7 +57,7 @@ export default async function ProjectPage({ params }: Params) {
               {project.title}
             </h1>
             <p className="mt-5 text-[17px] leading-[1.45] text-pretty text-muted lg:mt-[22px] lg:text-xl">{project.long}</p>
-            <div className="mt-[30px] flex flex-wrap gap-3">
+            <div className="mt-[30px] flex flex-wrap items-start gap-3">
               {project.playUrl ? (
                 <a href={project.playUrl} className={primary}>
                   Play now ↗
@@ -66,6 +67,7 @@ export default async function ProjectPage({ params }: Params) {
                   Read the write-up ↓
                 </a>
               )}
+              {project.appLink && <AppLink link={project.appLink} className={secondary} />}
               <a href={project.githubUrl} target="_blank" rel="noreferrer" className={secondary}>
                 GitHub ↗
               </a>

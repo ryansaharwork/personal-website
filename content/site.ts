@@ -30,6 +30,8 @@ export type Project = {
   images: { tile: string; hero: string };
   /** If set, the primary button says "Play now" and links here. */
   playUrl?: string;
+  /** Optional app link (beta or store), shown as a secondary button next to the primary one. Swap for the App Store link at launch. */
+  appLink?: { label: string; href: string; note?: string };
   githubUrl: string;
   facts: Fact[];
   /** Phone screenshots for the fanned hero. Leave empty to show the hero image instead. */
@@ -127,6 +129,8 @@ export const site = {
       long: "A SwiftUI client with zero third-party libraries, a 26-endpoint TypeScript API and a Postgres database on AWS — 11.5K lines in three months, from auth to search.",
       art: "linear-gradient(135deg,oklch(42% .15 40),oklch(22% .06 35) 60%,#120e0b)",
       images: { tile: "", hero: "" },
+      // At launch, swap for the App Store link, e.g. { label: "Download on the App Store", href: "https://apps.apple.com/…" }.
+      appLink: { label: "Join the beta", href: "https://testflight.apple.com/join/tWpaDD8r", note: "iPhone only · via TestFlight" },
       githubUrl: "https://github.com/ryansaharwork",
       facts: [
         { value: "11.5K", label: "lines" },

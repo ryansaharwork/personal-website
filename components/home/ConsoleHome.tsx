@@ -94,8 +94,8 @@ export function ConsoleHome() {
         const d = e.key === "ArrowRight" ? 1 : -1;
         select(sel < 0 ? (d > 0 ? 0 : n - 1) : (sel + d + n) % n);
       } else if (e.key === "Enter" && sel >= 0) {
-        // A focused tile link handles Enter itself.
-        if (t?.dataset.tile === undefined) {
+        // A focused tile, link or button handles Enter itself (e.g. the beta link must open TestFlight).
+        if (t?.dataset.tile === undefined && !t?.closest("a, button")) {
           e.preventDefault();
           open(sel);
         }
