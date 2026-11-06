@@ -72,6 +72,28 @@
   );
 }
 
+/* Page-load entrance: fade up, staggered with --rise-delay. Reduced motion: fade only. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@utility animate-rise {
+  /* `backwards` only: once finished it releases opacity/transform back to the element's own styles. */
+  animation: rise 560ms var(--ease-soft) var(--rise-delay, 0ms) backwards;
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: fade-in;
+  }
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {

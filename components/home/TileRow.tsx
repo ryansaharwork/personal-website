@@ -32,6 +32,8 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
             data-active={on}
             data-dim={any && !on}
             aria-current={on ? "true" : undefined}
+            // Page-load stagger, after the intro text and photo.
+            style={{ "--rise-delay": `${240 + i * 40}ms` } as React.CSSProperties}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(i)}
             // Only keyboard focus selects; a tap's focus must not count as the first tap.
             onFocus={(e) => e.currentTarget.matches(":focus-visible") && onFocusTile(i)}
@@ -42,7 +44,7 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
                 onSelect(i);
               }
             }}
-            className="group relative h-[160px] w-[130px] flex-none snap-start overflow-hidden rounded-[18px] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-ember-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[240px] lg:w-auto lg:min-w-[160px] lg:flex-1 lg:basis-0 lg:rounded-[22px]"
+            className="animate-rise group relative h-[160px] w-[130px] flex-none snap-start overflow-hidden rounded-[18px] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-ember-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[240px] lg:w-auto lg:min-w-[160px] lg:flex-1 lg:basis-0 lg:rounded-[22px]"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-[scale] duration-[1400ms] ease-soft motion-safe:group-data-[active=true]:scale-110"

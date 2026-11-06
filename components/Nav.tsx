@@ -43,9 +43,15 @@ export function Nav({ onNameClick, back, active }: Props) {
               onNameClick();
             }
           }}
-          className="flex items-center gap-3.5"
+          className="group flex items-center gap-3.5"
         >
-          <span className="font-display text-base font-bold lg:text-lg">{site.name}</span>
+          <span className="sr-only">{site.name}</span>
+          <span
+            aria-hidden
+            className="grid size-9 place-items-center rounded-full border border-cream/22 bg-ink/35 font-display text-[13px] font-extrabold tracking-[-.02em] backdrop-blur-md transition-[border-color] duration-200 ease-soft group-hover:border-ember/70 lg:size-10 lg:text-sm"
+          >
+            {site.monogram}
+          </span>
           <span className="hidden items-center gap-[7px] text-[13px] text-muted md:flex">
             <span className="glow-dot size-[7px] rounded-full bg-ember" />
             {site.status}
