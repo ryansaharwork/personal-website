@@ -24,14 +24,23 @@ type MediaProps = {
  * Wrapped in a named ViewTransition so it morphs between the homepage hero and the project page.
  */
 export function ProjectMedia({ project, fit = false, named = true }: MediaProps) {
+  // The named element (inside <ViewTransition>) holds only the phones or the art itself. Shadows sit on a
+  // plain wrapper outside it, so the morphing snapshot stays small and cheap and the shadow just fades.
   let media: React.ReactNode = null;
+  let shadow: React.ReactNode = null;
+  let frame = "relative";
   if (project.phones.length > 0) {
     media = <PhoneFan screens={project.phones} appName={project.title} fit={fit} interactive={!fit} />;
-  } else if (project.images.hero) {
-    media = (
+    shadow = (
       <div
-        className={`relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_40px_80px_-30px_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[480px] max-w-full" : "mx-auto w-full max-w-[640px]"}`}
-      >
+        aria-hidden
+        className="pointer-events-none absolute inset-x-[4%] -bottom-[7%] h-[34%] bg-[radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,.25)_55%,transparent)]"
+      />
+    );
+  } else if (project.images.hero) {
+    frame = `relative aspect-[4/3] rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_40px_80px_-30px_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[480px] max-w-full" : "mx-auto w-full max-w-[640px]"}`;
+    media = (
+      <div className="relative h-full w-full overflow-hidden rounded-3xl">
         <ImageSlot
           src={project.images.hero}
           alt={`${project.title} hero art`}
@@ -44,17 +53,20 @@ export function ProjectMedia({ project, fit = false, named = true }: MediaProps)
   }
   if (!media) return null;
   return (
-    // default="none": only the cross-page morph (share) animates, not every unrelated transition.
-    <ViewTransition name={named ? mediaName(project.slug) : undefined} share="morph" default="none">
-      {media}
-    </ViewTransition>
+    <div className={frame}>
+      {shadow}
+      {/* default="none": only the cross-page morph (share) animates, not every unrelated transition. */}
+      <ViewTransition name={named ? mediaName(project.slug) : undefined} share="morph-media" default="none">
+        {media}
+      </ViewTransition>
+    </div>
   );
 }
 
 /** Wraps a project's title element so it morphs between the homepage hero and the project page. */
 export function ProjectTitle({ slug, named = true, children }: { slug: string; named?: boolean; children: React.ReactNode }) {
   return (
-    <ViewTransition name={named ? titleName(slug) : undefined} share="morph" default="none">
+    <ViewTransition name={named ? titleName(slug) : undefined} share="morph-title" default="none">
       {children}
     </ViewTransition>
   );

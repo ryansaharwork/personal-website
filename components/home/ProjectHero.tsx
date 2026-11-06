@@ -18,7 +18,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
         <div className="lg:max-w-[min(760px,56%)] lg:flex-none">
           <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[13px]">{project.kicker}</div>
           <ProjectTitle slug={project.slug} named={visible}>
-            <h2 className="mt-2 w-fit font-display text-[44px] leading-[.95] font-extrabold tracking-[-.045em] lg:mt-3.5 lg:text-[clamp(64px,6.1vw,88px)] lg:leading-[.92] lg:tracking-[-.05em]">
+            <h2 className="mt-2 w-fit font-display text-[44px] leading-[.9] font-extrabold tracking-[-.05em] lg:mt-3.5 lg:text-[clamp(64px,6.1vw,88px)]">
               {project.title}
             </h2>
           </ProjectTitle>
@@ -51,7 +51,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
             onClick={onOpen}
             className="relative order-first min-h-0 flex-1 cursor-pointer [@media(max-height:700px)]:hidden lg:order-none lg:mx-[clamp(24px,3.5vw,56px)] lg:block lg:self-stretch"
           >
-            <div className="absolute inset-0 flex items-end justify-start lg:items-center lg:justify-center">
+            <div data-fit-box className="absolute inset-0 flex items-end justify-start lg:items-center lg:justify-center">
               <ProjectMedia project={project} fit named={visible} />
             </div>
           </div>

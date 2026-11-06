@@ -74,6 +74,11 @@ export function ConsoleHome() {
 
   const open = useCallback((i: number) => router.push(`/projects/${projects[i].slug}`), [router]);
 
+  // Make sure the selected project's page is prefetched, so the view transition starts immediately.
+  useEffect(() => {
+    if (act >= 0) router.prefetch(`/projects/${projects[act].slug}`);
+  }, [act, router]);
+
   const goIntro = useCallback(() => {
     cancelLeave();
     setSel(-1);

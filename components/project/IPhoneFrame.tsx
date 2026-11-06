@@ -4,7 +4,7 @@
  */
 export function IPhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative h-[874px] w-[402px] overflow-hidden rounded-[48px] bg-black shadow-[0_40px_80px_rgba(0,0,0,.18),0_0_0_1px_rgba(0,0,0,.12)]">
+    <div className="relative h-[874px] w-[402px] overflow-hidden rounded-[48px] bg-black shadow-[0_0_0_1px_rgba(0,0,0,.12)]">
       <div className="absolute top-[11px] left-1/2 z-50 h-[37px] w-[126px] -translate-x-1/2 rounded-3xl bg-black" />
       <StatusBar />
       <div className="h-full">{children}</div>

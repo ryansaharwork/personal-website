@@ -21,7 +21,7 @@ const MIN_S = 0.14;
 type Props = {
   screens: PhoneScreen[];
   appName: string;
-  /** Scale to fill the parent element's box (the parent must not size itself from the fan). */
+  /** Scale to fill the nearest `[data-fit-box]` ancestor (which must not size itself from the fan). */
   fit?: boolean;
   /** Hover/tap lifts a phone and dims the others. Off for decorative copies. */
   interactive?: boolean;
@@ -37,7 +37,7 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
 
   useLayoutEffect(() => {
     const el = ref.current;
-    const box = el?.parentElement;
+    const box = el?.closest<HTMLElement>("[data-fit-box]");
     if (!fit || !el || !box) return;
     const apply = () => {
       const { width, height } = box.getBoundingClientRect();
@@ -67,7 +67,7 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
             key={screen.title}
             onPointerEnter={interactive ? (e) => e.pointerType === "mouse" && setHot(i) : undefined}
             onClick={interactive ? () => setHot((v) => (v === i ? -1 : i)) : undefined}
-            className={`relative flex-none transition-[transform,opacity] duration-[350ms] ease-soft [transform-origin:50%_100%] [filter:drop-shadow(0_40px_60px_rgba(0,0,0,.7))] motion-reduce:transform-none! motion-reduce:transition-[opacity] ${interactive ? "cursor-pointer" : ""}`}
+            className={`relative flex-none transition-[transform,opacity] duration-[350ms] ease-soft [transform-origin:50%_100%] motion-reduce:transform-none! motion-reduce:transition-[opacity] ${interactive ? "cursor-pointer" : ""}`}
             style={{
               width: "calc(402px * var(--s))",
               height: "calc(874px * var(--s))",
@@ -81,11 +81,28 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
               <IPhoneFrame>
                 {screen.src ? (
                   <div className="relative h-full">
-                    <Image src={screen.src} alt={`${appName} — ${screen.title} screen`} fill sizes="262px" className="object-cover" />
+                    {/* Eager and decoded up front, so the page is ready when a view transition snapshots it.
+                        Same `sizes` on both pages, so the homepage copy warms the cache for the project page. */}
+                    <Image
+                      src={screen.src}
+                      alt={`${appName} — ${screen.title} screen`}
+                      fill
+                      sizes="262px"
+                      loading="eager"
+                      decoding="sync"
+                      preload={!fit}
+                      className="object-cover"
+                    />
                   </div>
                 ) : (
                   <PlaceholderScreen screen={screen} appName={appName} />
                 )}
+                {/* Side phones sit slightly darker, for depth without a blurred shadow. */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 z-[55] bg-black/20 transition-opacity duration-[350ms] ease-soft"
+                  style={{ opacity: i !== 1 && !h ? 1 : 0 }}
+                />
               </IPhoneFrame>
             </div>
           </div>
