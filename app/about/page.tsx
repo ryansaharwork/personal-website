@@ -23,11 +23,11 @@ export default function AboutPage() {
       {/* Solid ink at the very top and bottom, so the overscroll area continues the page. */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-32 edge-fade-bottom lg:h-44" />
-      <div className="relative px-5 pt-5 lg:px-14 lg:pt-10">
+      <div className="relative mx-auto max-w-site px-5 pt-5 lg:px-14 lg:pt-10">
         <Nav back active="about" />
       </div>
 
-      <div className="relative mx-auto grid max-w-[1440px] gap-14 px-5 pt-12 pb-20 lg:grid-cols-[380px_1fr] lg:items-start lg:gap-20 lg:px-14 lg:pt-[62px] lg:pb-16">
+      <div className="relative mx-auto grid max-w-site gap-14 px-5 pt-12 pb-20 lg:grid-cols-[380px_1fr] lg:items-start lg:gap-20 lg:px-14 lg:pt-[62px] lg:pb-16">
         <div className="flex flex-col gap-7">
           <div className="relative size-[140px] overflow-hidden rounded-full shadow-[0_0_0_3px_#0b0a09,0_0_0_5px_oklch(76%_.16_45),0_30px_60px_-20px_rgba(0,0,0,.8)] lg:size-[200px]">
             {/* The 3:4 photo is cropped to a circle here; bias it up so the whole head stays in frame. */}

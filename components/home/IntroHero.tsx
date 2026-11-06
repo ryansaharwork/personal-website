@@ -15,7 +15,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           <h1 className="animate-rise font-display text-[clamp(44px,14.6vw,60px)] leading-[.9] font-extrabold tracking-[-.05em] lg:text-[clamp(72px,min(7.2vw,11.5svh),104px)]">
             Hi, I&apos;m
             <br />
-            {site.name}.
+            {site.name}!
           </h1>
           <p className="animate-rise mt-3.5 text-base leading-[1.4] text-pretty text-muted [--rise-delay:60ms] lg:mt-6 lg:text-[22px]">
             {site.introLine}
@@ -34,7 +34,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
         </div>
 
         {/* Cutout portrait on a soft ember glow. Above the text on phones; beside it, bleeding up a little, on desktop. */}
-        <div className="animate-rise relative order-first aspect-[581/650] self-start lg:self-auto h-[clamp(150px,calc(100svh-560px),230px)] flex-none [--rise-delay:180ms] [@media(max-height:700px)]:hidden lg:order-none lg:block lg:h-[calc(100%+40px)] lg:max-h-[620px]">
+        <div className="animate-rise relative order-first aspect-[581/650] self-start lg:ml-auto lg:self-auto h-[clamp(150px,calc(100svh-560px),230px)] flex-none [--rise-delay:180ms] [@media(max-height:700px)]:hidden lg:order-none lg:block lg:h-[calc(100%+40px)] lg:max-h-[620px]">
           <div
             aria-hidden
             className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_42%,oklch(62%_.17_45/.5),oklch(55%_.15_45/.2)_55%,transparent)]"

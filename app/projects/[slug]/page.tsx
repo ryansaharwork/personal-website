@@ -43,11 +43,11 @@ export default async function ProjectPage({ params }: Params) {
         {/* Solid ink at the very top, so the overscroll area continues the page. */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
 
-        <div className="relative z-10 px-5 pt-5 lg:absolute lg:inset-x-14 lg:top-10 lg:px-0 lg:pt-0">
+        <div className="relative z-10 mx-auto max-w-site px-5 pt-5 lg:absolute lg:inset-x-0 lg:top-10 lg:px-14 lg:pt-0">
           <Nav back />
         </div>
 
-        <div className="relative grid gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-14 lg:top-[110px] lg:bottom-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center lg:p-0">
+        <div className="relative mx-auto grid max-w-site gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-0 lg:top-[110px] lg:bottom-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center lg:px-14 lg:py-0">
           <div>
             <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[13px]">
               {project.kicker} · {project.year}
@@ -89,7 +89,7 @@ export default async function ProjectPage({ params }: Params) {
         </div>
       </section>
 
-      <div className="mx-auto max-w-[1440px] px-5 pb-24 lg:px-14">
+      <div className="mx-auto max-w-site px-5 pb-24 lg:px-14">
         <WriteUp project={project} />
         <UpNext projects={others} />
       </div>

@@ -126,33 +126,36 @@ export function ConsoleHome() {
       <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 h-28 edge-fade-top lg:h-40" />
       <div aria-hidden className="pointer-events-none fixed inset-x-0 bottom-0 h-24 edge-fade-bottom lg:h-32" />
 
-      <div className="relative z-10 px-5 pt-5 lg:px-14 lg:pt-10">
-        <Nav onNameClick={goIntro} />
-      </div>
-
-      {/* Hover region: a hovered project stays shown while the mouse is anywhere over the hero or tiles. */}
-      <div
-        className="flex min-h-0 flex-1 flex-col"
-        onPointerEnter={(e) => e.pointerType === "mouse" && cancelLeave()}
-        onPointerLeave={(e) => {
-          if (e.pointerType !== "mouse") return;
-          cancelLeave();
-          leaveTimer.current = setTimeout(() => setHover(-1), LEAVE_DELAY);
-        }}
-      >
-        <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(24px,8svh,70px)] lg:mb-2">
-          <IntroHero visible={!heroOn} />
-          <ProjectHero project={projects[shown]} visible={heroOn && !dip} onOpen={() => open(shown)} />
+      {/* Content capped and centered on large screens; the background layers above stay full-bleed. */}
+      <div className="mx-auto flex min-h-0 w-full max-w-site flex-1 flex-col">
+        <div className="relative z-10 px-5 pt-5 lg:px-14 lg:pt-10">
+          <Nav onNameClick={goIntro} />
         </div>
 
-        <TileRow
-          projects={projects}
-          active={act}
-          tileRefs={tileRefs}
-          onHover={hoverTile}
-          onFocusTile={setSel}
-          onSelect={setSel}
-        />
+        {/* Hover region: a hovered project stays shown while the mouse is anywhere over the hero or tiles. */}
+        <div
+          className="flex min-h-0 flex-1 flex-col"
+          onPointerEnter={(e) => e.pointerType === "mouse" && cancelLeave()}
+          onPointerLeave={(e) => {
+            if (e.pointerType !== "mouse") return;
+            cancelLeave();
+            leaveTimer.current = setTimeout(() => setHover(-1), LEAVE_DELAY);
+          }}
+        >
+          <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(24px,8svh,70px)] lg:mb-2">
+            <IntroHero visible={!heroOn} />
+            <ProjectHero project={projects[shown]} visible={heroOn && !dip} onOpen={() => open(shown)} />
+          </div>
+
+          <TileRow
+            projects={projects}
+            active={act}
+            tileRefs={tileRefs}
+            onHover={hoverTile}
+            onFocusTile={setSel}
+            onSelect={setSel}
+          />
+        </div>
       </div>
     </main>
   );
