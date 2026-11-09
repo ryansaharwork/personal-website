@@ -191,7 +191,6 @@ export const site = {
           },
         ],
         next: "Launch on the App Store, then build smart search: tell Valt what you're in the mood for, and it finds games that match your taste and helps you learn more about the games you love.",
-        whatScreen: { title: "Profile", hint: "Favorites, reviews and thoughts in one place", src: "/images/valt-profile.webp" },
       },
     },
     {
