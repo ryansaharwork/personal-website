@@ -3,6 +3,7 @@ import type { Project } from "@/content/site";
 import { AppIcon, ICON_SHADOW } from "@/components/AppIcon";
 import { ImageSlot } from "@/components/ImageSlot";
 import { PhoneFan } from "./PhoneFan";
+import { Wordmark } from "./Wordmark";
 
 /** Shared-element names: the same name on the homepage hero and the project page makes them morph. */
 const mediaName = (slug: string) => `project-media-${slug}`;
@@ -99,7 +100,14 @@ export function TitleLockup({
         <div className="relative flex h-[0.9em] w-fit items-center gap-[0.2em]">
           {icon && <AppIcon src={icon} sizes="(min-width: 1921px) 140px, 80px" shadow={false} className="size-[0.62em] flex-none" />}
           <Heading className="font-display text-[1em] leading-[.9] font-extrabold tracking-[-.05em] text-title">
-            {project.title}
+            {project.wordmark ? (
+              <>
+                <Wordmark name={project.wordmark} />
+                <span className="sr-only">{project.title}</span>
+              </>
+            ) : (
+              project.title
+            )}
           </Heading>
         </div>
       </ViewTransition>

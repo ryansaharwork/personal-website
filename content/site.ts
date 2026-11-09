@@ -20,6 +20,8 @@ export type Project = {
   label: string;
   /** Large title on the hero and project page. */
   title: string;
+  /** Optional logo wordmark drawn instead of the text title (components/project/Wordmark.tsx); title stays its text. */
+  wordmark?: "polyvalt";
   kicker: string;
   year: string;
   /** One line under the title on the homepage. */
@@ -75,7 +77,7 @@ export const site = {
   introLine: "Software engineer. USC CS '26.",
   /** Meta description (search results, link previews). */
   description: "I build iOS apps, game engines and the backends under them. USC CS '26, Davis, CA.",
-  bio: "I'm a software engineer who graduated from USC with a B.S. in Computer Science in May 2026. I like owning the whole stack — Valt is a SwiftUI app, a TypeScript API and a Postgres database, and I built all three. Most recently I've been leading an engineering team and making slow dashboards fast.",
+  bio: "I'm a software engineer who graduated from USC with a B.S. in Computer Science in May 2026. I like owning the whole stack — PolyValt is a SwiftUI app, a TypeScript API and a Postgres database, and I built all three. Most recently I've been leading an engineering team and making slow dashboards fast.",
   /** Initials shown as the home link in the top-left nav. */
   monogram: "RS",
   /**
@@ -143,9 +145,10 @@ export const site = {
 
   projects: [
     {
-      slug: "valt",
-      label: "Valt",
-      title: "Valt",
+      slug: "polyvalt",
+      label: "PolyValt",
+      title: "PolyValt",
+      wordmark: "polyvalt",
       kicker: "iOS app",
       year: "2026",
       desc: "A SwiftUI app, a 26-endpoint TypeScript API and a Postgres database on AWS — built solo in three months.",
@@ -169,7 +172,7 @@ export const site = {
       ],
       writeup: {
         whatHead: "One place for every gamer's opinion.",
-        what: "Film fans have Letterboxd. Gamers are split across PlayStation, Xbox, Nintendo and PC, with no shared place to talk about what they play. Valt brings them together: log the games you play, rate and review them, and follow friends to see what they think. Players get a voice, and hear from each other instead of only from critics.",
+        what: "Film fans have Letterboxd. Gamers are split across PlayStation, Xbox, Nintendo and PC, with no shared place to talk about what they play. PolyValt brings them together: log the games you play, rate and review them, and follow friends to see what they think. Players get a voice, and hear from each other instead of only from critics.",
         arch: [
           { title: "SwiftUI app", detail: "No third-party libraries · Keychain token storage" },
           { title: "TypeScript API", detail: "Express · Prisma · 26 endpoints · JWT auth" },
@@ -190,7 +193,7 @@ export const site = {
             body: "Editing a review mid-scroll could make the feed serve an entire page twice. I reproduced the bug on purpose to prove the cause, fixed it, then reran the same test to confirm the fix.",
           },
         ],
-        next: "Launch on the App Store, then build smart search: tell Valt what you're in the mood for, and it finds games that match your taste and helps you learn more about the games you love.",
+        next: "Launch on the App Store, then build smart search: tell PolyValt what you're in the mood for, and it finds games that match your taste and helps you learn more about the games you love.",
       },
     },
     {
