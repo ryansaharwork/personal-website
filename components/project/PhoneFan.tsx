@@ -12,7 +12,7 @@ const FAN = [
   { r: 9, x: -60, s: 0.9, z: 1 },
 ];
 
-/** The fan's footprint at --s = 1, including the side phones' rotation and the hover lift. */
+/** The fan's footprint at --s = 1 (in CSS px at the default 16px root), including rotation and hover lift. */
 const FOOTPRINT = { w: 1000, h: 920 };
 const MAX_S = 0.65;
 /** Below this the phones are too small to read, so a fitted fan hides instead. */
@@ -41,7 +41,9 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
     if (!fit || !el || !box) return;
     const apply = () => {
       const { width, height } = box.getBoundingClientRect();
-      const s = Math.min(height / FOOTPRINT.h, width / FOOTPRINT.w, MAX_S);
+      // Phones are sized in rem, so on large screens (root font > 16px) their footprint grows with it.
+      const root = parseFloat(getComputedStyle(document.documentElement).fontSize) / 16 || 1;
+      const s = Math.min(height / (FOOTPRINT.h * root), width / (FOOTPRINT.w * root), MAX_S);
       el.style.setProperty("--s", String(Math.max(s, MIN_S)));
       el.style.visibility = s < MIN_S ? "hidden" : "";
     };
@@ -69,15 +71,16 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
             onClick={interactive ? () => setHot((v) => (v === i ? -1 : i)) : undefined}
             className={`relative flex-none transition-[transform,opacity] duration-[350ms] ease-soft [transform-origin:50%_100%] motion-reduce:transform-none! motion-reduce:transition-[opacity] ${interactive ? "cursor-pointer" : ""}`}
             style={{
-              width: "calc(402px * var(--s))",
-              height: "calc(874px * var(--s))",
-              margin: "0 calc(-46px * var(--s))",
-              transform: `translateX(calc(${b.x / 0.65}px * var(--s))) translateY(calc(${h ? -16 / 0.65 : 0}px * var(--s))) scale(${scale}) rotate(${h ? 0 : b.r}deg)`,
+              // rem (402×874 at the 16px root) so the fan scales with the root size on large screens.
+              width: "calc(25.125rem * var(--s))",
+              height: "calc(54.625rem * var(--s))",
+              margin: "0 calc(-2.875rem * var(--s))",
+              transform: `translateX(calc(${b.x / 0.65 / 16}rem * var(--s))) translateY(calc(${h ? -1 / 0.65 : 0}rem * var(--s))) scale(${scale}) rotate(${h ? 0 : b.r}deg)`,
               opacity: other ? 0.55 : 1,
               zIndex: h ? 3 : b.z,
             }}
           >
-            <div className="w-[402px] origin-top-left" style={{ transform: "scale(var(--s))" }}>
+            <div className="w-[25.125rem] origin-top-left" style={{ transform: "scale(var(--s))" }}>
               <IPhoneFrame>
                 {screen.src ? (
                   <div className="relative h-full">
@@ -87,7 +90,7 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
                       src={screen.src}
                       alt={`${appName} — ${screen.title} screen`}
                       fill
-                      sizes="262px"
+                      sizes="(min-width: 1921px) 470px, 262px"
                       loading="eager"
                       decoding="sync"
                       preload={!fit}
@@ -113,23 +116,23 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
 }
 
 function PlaceholderScreen({ screen, appName }: { screen: PhoneScreen; appName: string }) {
-  const tile = "aspect-[3/4] rounded-[10px] bg-[repeating-linear-gradient(135deg,#1f1a14_0_8px,#26201a_8px_16px)]";
+  const tile = "aspect-[3/4] rounded-[0.625rem] bg-[repeating-linear-gradient(135deg,#1f1a14_0_0.5rem,#26201a_0.5rem_1rem)]";
   return (
-    <div className="h-full bg-[#0f0d0b] px-5 pt-[70px] text-cream" aria-label={`${screen.title} screenshot placeholder`}>
+    <div className="h-full bg-[#0f0d0b] px-5 pt-[4.375rem] text-cream" aria-label={`${screen.title} screenshot placeholder`}>
       <div className="flex items-baseline justify-between">
-        <span className="text-[34px] font-semibold tracking-[-.02em]">{screen.title}</span>
-        <span className="text-[15px] text-ember">{appName}</span>
+        <span className="text-[2.125rem] font-semibold tracking-[-.02em]">{screen.title}</span>
+        <span className="text-[0.9375rem] text-ember">{appName}</span>
       </div>
-      <div className="mt-[18px] flex h-10 items-center rounded-xl bg-[#1c1813] px-3.5 text-[15px] text-[#7a7067]">{screen.hint}</div>
-      <div className="mt-[26px] grid grid-cols-3 gap-3">
+      <div className="mt-[1.125rem] flex h-10 items-center rounded-xl bg-[#1c1813] px-3.5 text-[0.9375rem] text-[#7a7067]">{screen.hint}</div>
+      <div className="mt-[1.625rem] grid grid-cols-3 gap-3">
         <div className={tile} />
         <div className={tile} />
         <div className={tile} />
       </div>
-      <div className="mt-[22px] flex flex-col gap-3">
-        <div className="h-[58px] rounded-[10px] bg-[#1c1813]" />
-        <div className="h-[58px] rounded-[10px] bg-[#1c1813]" />
-        <div className="h-[58px] rounded-[10px] bg-[#1c1813]" />
+      <div className="mt-[1.375rem] flex flex-col gap-3">
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
       </div>
     </div>
   );

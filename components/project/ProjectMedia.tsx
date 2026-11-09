@@ -39,14 +39,14 @@ export function ProjectMedia({ project, fit = false, named = true }: MediaProps)
       />
     );
   } else if (project.images.hero) {
-    frame = `relative aspect-[4/3] rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_40px_80px_-30px_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[480px] max-w-full" : "mx-auto w-full max-w-[640px]"}`;
+    frame = `relative aspect-[4/3] rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[30rem] max-w-full" : "mx-auto w-full max-w-[40rem]"}`;
     media = (
       <div className="relative h-full w-full overflow-hidden rounded-3xl">
         <ImageSlot
           src={project.images.hero}
           alt={`${project.title} hero art`}
           label=""
-          sizes={fit ? "480px" : "(min-width: 1024px) 640px, 100vw"}
+          sizes={fit ? "(min-width: 1921px) 860px, 480px" : "(min-width: 1921px) 1150px, (min-width: 1024px) 640px, 100vw"}
           priority={!fit}
         />
       </div>
@@ -97,7 +97,7 @@ export function TitleLockup({
         {/* Explicit em height: WebKit rounds text line boxes to whole pixels, which would skew the
             aspect ratio between the two sizes. */}
         <div className="relative flex h-[0.9em] w-fit items-center gap-[0.2em]">
-          {icon && <AppIcon src={icon} sizes="80px" shadow={false} className="size-[0.62em] flex-none" />}
+          {icon && <AppIcon src={icon} sizes="(min-width: 1921px) 140px, 80px" shadow={false} className="size-[0.62em] flex-none" />}
           <Heading className="font-display text-[1em] leading-[.9] font-extrabold tracking-[-.05em]">{project.title}</Heading>
         </div>
       </ViewTransition>

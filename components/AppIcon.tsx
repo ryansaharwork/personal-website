@@ -9,7 +9,7 @@ type Props = {
 };
 
 /** Soft shadow with the icon's corner radius. Exported so a separate shadow layer can match it. */
-export const ICON_SHADOW = "shadow-[0_6px_16px_rgba(0,0,0,.35),0_1px_3px_rgba(0,0,0,.3)]";
+export const ICON_SHADOW = "shadow-[0_0.375rem_1rem_rgba(0,0,0,.35),0_1px_0.1875rem_rgba(0,0,0,.3)]";
 
 /**
  * An app icon. The image carries its own iOS-style rounded corners and transparent background, so it isn't

@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 const primary =
-  "rounded-full bg-ember px-[22px] py-[13px] text-[15px] font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi";
+  "rounded-full bg-ember px-[1.375rem] py-[0.8125rem] text-[0.9375rem] font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi";
 const secondary =
-  "rounded-full border border-cream/22 bg-ink/35 px-[22px] py-[13px] text-[15px] text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50";
+  "rounded-full border border-cream/22 bg-ink/35 px-[1.375rem] py-[0.8125rem] text-[0.9375rem] text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50";
 
 export default async function ProjectPage({ params }: Params) {
   const project: Project | undefined = getProject((await params).slug);
@@ -33,7 +33,7 @@ export default async function ProjectPage({ params }: Params) {
 
   return (
     <main>
-      <section className="relative overflow-x-clip lg:h-[min(760px,max(640px,calc(100svh-140px)))]">
+      <section className="relative overflow-x-clip lg:h-[min(47.5rem,max(40rem,calc(100svh-8.75rem)))]">
         <div className="absolute inset-0" style={{ background: project.art }} />
         {project.images.hero && project.phones.length > 0 && (
           <div className="absolute inset-0">
@@ -48,14 +48,14 @@ export default async function ProjectPage({ params }: Params) {
           <Nav back returnTo={project.slug} />
         </div>
 
-        <div className="relative mx-auto grid max-w-site gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-0 lg:top-[110px] lg:bottom-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center lg:px-14 lg:py-0">
+        <div className="relative mx-auto grid max-w-site gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-0 lg:top-[6.875rem] lg:bottom-10 lg:grid-cols-[minmax(0,35rem)_1fr] lg:items-center lg:px-14 lg:py-0">
           <div>
-            <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[13px]">
+            <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[0.8125rem]">
               {project.kicker} · {project.year}
             </div>
-            <TitleLockup project={project} as="h1" className="mt-3 text-[64px] lg:mt-4 lg:text-[clamp(72px,7.2vw,104px)]" />
-            <p className="mt-5 text-[17px] leading-[1.45] text-pretty text-muted lg:mt-[22px] lg:text-xl">{project.long}</p>
-            <div className="mt-[30px] flex flex-wrap items-start gap-3">
+            <TitleLockup project={project} as="h1" className="mt-3 text-[4rem] lg:mt-4 lg:text-[clamp(4.5rem,7.2vw,6.5rem)]" />
+            <p className="mt-5 text-[1.0625rem] leading-[1.45] text-pretty text-muted lg:mt-[1.375rem] lg:text-xl">{project.long}</p>
+            <div className="mt-[1.875rem] flex flex-wrap items-start gap-3">
               {project.playUrl ? (
                 <a href={project.playUrl} className={primary}>
                   Play now ↗
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: Params) {
           {hasProjectMedia(project) ? (
             <ProjectMedia project={project} />
           ) : (
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-[640px] overflow-hidden rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_40px_80px_-30px_rgba(0,0,0,.8)]">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-[40rem] overflow-hidden rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)]">
               <ImageSlot src={project.images.hero} alt={`${project.title} hero art`} label={`${project.title} — hero art 4:3`} sizes="(min-width: 1024px) 640px, 100vw" priority />
             </div>
           )}

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const pill =
-  "rounded-full border border-cream/22 bg-ink/35 px-3 py-[7px] text-cream backdrop-blur-md transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:px-4 lg:py-[9px]";
+  "rounded-full border border-cream/22 bg-ink/35 px-3 py-[0.4375rem] text-cream backdrop-blur-md transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:px-4 lg:py-[0.5625rem]";
 
 export function Nav({ onNameClick, back, active, returnTo }: Props) {
   const router = useRouter();
@@ -35,7 +35,7 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
   }, [back, router, returnTo]);
 
   return (
-    <nav className="relative z-10 flex items-center justify-between gap-4 text-[13px] lg:text-sm">
+    <nav className="relative z-10 flex items-center justify-between gap-4 text-[0.8125rem] lg:text-sm">
       {back ? (
         <Link
           href="/"
@@ -58,12 +58,12 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
           <span className="sr-only">{site.name}</span>
           <span
             aria-hidden
-            className="grid size-9 place-items-center rounded-full border border-cream/22 bg-ink/35 font-display text-[13px] font-extrabold tracking-[-.02em] backdrop-blur-md transition-[border-color] duration-200 ease-soft group-hover:border-ember/70 lg:size-10 lg:text-sm"
+            className="grid size-9 place-items-center rounded-full border border-cream/22 bg-ink/35 font-display text-[0.8125rem] font-extrabold tracking-[-.02em] backdrop-blur-md transition-[border-color] duration-200 ease-soft group-hover:border-ember/70 lg:size-10 lg:text-sm"
           >
             {site.monogram}
           </span>
-          <span className="hidden items-center gap-[7px] text-[13px] text-muted md:flex">
-            <span className="glow-dot size-[7px] rounded-full bg-ember" />
+          <span className="hidden items-center gap-[0.4375rem] text-[0.8125rem] text-muted md:flex">
+            <span className="glow-dot size-[0.4375rem] rounded-full bg-ember" />
             {site.status}
           </span>
         </Link>
@@ -81,7 +81,7 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
         </a>
         <a
           href={`mailto:${site.links.email}`}
-          className="rounded-full bg-ember px-3 py-[7px] font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi lg:px-4 lg:py-[9px]"
+          className="rounded-full bg-ember px-3 py-[0.4375rem] font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi lg:px-4 lg:py-[0.5625rem]"
         >
           Contact
         </a>

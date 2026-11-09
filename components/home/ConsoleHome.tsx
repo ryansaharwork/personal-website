@@ -120,7 +120,7 @@ export function ConsoleHome() {
   const heroOn = act >= 0;
 
   return (
-    <main className="relative flex h-svh min-h-[600px] flex-col overflow-hidden lg:min-h-[760px]">
+    <main className="relative flex h-svh min-h-[37.5rem] flex-col overflow-hidden lg:min-h-[47.5rem]">
       {/* Full-screen art: one layer per state, crossfaded. Fixed so it fills the whole viewport. */}
       <div aria-hidden className="fixed inset-0">
         <BgLayer art={site.introArt} on={!heroOn} />
@@ -152,7 +152,7 @@ export function ConsoleHome() {
             leaveTimer.current = setTimeout(() => setHover(-1), LEAVE_DELAY);
           }}
         >
-          <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(24px,8svh,70px)] lg:mb-2">
+          <div className="relative mx-5 mt-6 min-h-0 flex-1 lg:mx-14 lg:mt-[clamp(1.5rem,8svh,4.375rem)] lg:mb-2">
             <IntroHero visible={!heroOn} />
             <ProjectHero project={projects[shown]} visible={heroOn && !dip} onOpen={() => open(shown)} />
           </div>
