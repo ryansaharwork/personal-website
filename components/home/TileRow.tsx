@@ -36,6 +36,15 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
             // Page-load stagger, after the intro text and photo.
             style={{ "--rise-delay": `${240 + i * 40}ms` } as React.CSSProperties}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(i)}
+            // Cursor light: position it in the tile's own (unscaled) pixels. A CSS variable, so no re-render.
+            onPointerMove={(e) => {
+              if (e.pointerType !== "mouse") return;
+              const el = e.currentTarget;
+              const r = el.getBoundingClientRect();
+              const k = el.offsetWidth / r.width;
+              el.style.setProperty("--mx", `${(e.clientX - r.left) * k}px`);
+              el.style.setProperty("--my", `${(e.clientY - r.top) * k}px`);
+            }}
             // Only keyboard focus selects; a tap's focus must not count as the first tap.
             onFocus={(e) => e.currentTarget.matches(":focus-visible") && onFocusTile(i)}
             onClick={(e) => {
@@ -52,6 +61,11 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
               style={{ backgroundImage: p.images.tile ? `url(${p.images.tile})` : p.art }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,color-mix(in_srgb,var(--color-ink)_75%,transparent))]" />
+            {/* Soft white light that follows the cursor while hovering (mouse and trackpad only). */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(16rem_circle_at_var(--mx,50%)_var(--my,50%),var(--glow-tile),transparent_60%)] opacity-0 transition-opacity duration-300 ease-soft group-hover:opacity-100 [@media(hover:hover)_and_(pointer:fine)]:block"
+            />
             {/* App icon, centered in the space above the label. No percentage heights/offsets (Safari resolves
                 those against an aspect-ratio height inconsistently): a flex container centers it, the bottom padding
                 keeps the label clear, and the size is explicit. On desktop the tile is square up to 240px tall, so

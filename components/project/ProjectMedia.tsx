@@ -98,7 +98,9 @@ export function TitleLockup({
             aspect ratio between the two sizes. */}
         <div className="relative flex h-[0.9em] w-fit items-center gap-[0.2em]">
           {icon && <AppIcon src={icon} sizes="(min-width: 1921px) 140px, 80px" shadow={false} className="size-[0.62em] flex-none" />}
-          <Heading className="font-display text-[1em] leading-[.9] font-extrabold tracking-[-.05em]">{project.title}</Heading>
+          <Heading className="font-display text-[1em] leading-[.9] font-extrabold tracking-[-.05em]">
+            <span className="text-silver">{project.title}</span>
+          </Heading>
         </div>
       </ViewTransition>
     </div>

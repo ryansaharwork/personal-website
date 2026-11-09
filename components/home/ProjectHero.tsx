@@ -32,14 +32,14 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
             <button
               type="button"
               onClick={onOpen}
-              className="inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-on-accent transition-[background-color] duration-200 ease-soft hover:bg-accent-hover lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
+              className="inline-flex cursor-pointer items-center gap-2.5 btn-primary rounded-full px-4 py-2.5 text-sm lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
             >
               {project.playUrl ? "Play now" : "Read the write-up"}
             </button>
             {project.appLink && (
               <AppLink
                 link={project.appLink}
-                className="inline-flex rounded-full border border-cream/22 bg-ink/35 px-3.5 py-[0.5625rem] text-sm text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
+                className="btn-primary inline-flex rounded-full px-3.5 py-[0.5625rem] text-sm lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
               />
             )}
             <span className="hidden h-10 items-center gap-1.5 text-[0.8125rem] text-dim lg:h-11 [@media(hover:hover)]:flex">

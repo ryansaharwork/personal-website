@@ -14,7 +14,9 @@ export function WriteUp({ project }: { project: Project }) {
       <Reveal className="pt-6 lg:pt-10">
         <h2 className={label}>What it is</h2>
         <div className="grid gap-5 md:grid-cols-2 md:gap-10">
-          <p className="font-display text-[1.875rem] leading-[1.02] font-bold tracking-[-.04em] text-pretty lg:text-[2.5rem]">{w.whatHead}</p>
+          <p className="font-display text-[1.875rem] leading-[1.02] font-bold tracking-[-.04em] text-pretty lg:text-[2.5rem]">
+            <span className="text-silver">{w.whatHead}</span>
+          </p>
           {/* Phones: headline, text, phone. Wider: text spans the right column; the phone sits under the headline. */}
           <p className="text-[1.0625rem] leading-normal text-pretty text-muted md:col-start-2 md:row-span-2 md:row-start-1 md:self-start md:pt-1.5 lg:text-[1.1875rem]">
             {w.what}

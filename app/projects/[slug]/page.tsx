@@ -21,10 +21,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return project ? { title: project.title, description: project.desc } : {};
 }
 
-const primary =
-  "rounded-full bg-accent px-[1.375rem] py-[0.8125rem] text-[0.9375rem] font-medium text-on-accent transition-[background-color] duration-200 ease-soft hover:bg-accent-hover";
+const primary = "btn-primary rounded-full px-[1.375rem] py-[0.8125rem] text-[0.9375rem]";
 const secondary =
-  "rounded-full border border-cream/22 bg-ink/35 px-[1.375rem] py-[0.8125rem] text-[0.9375rem] text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50";
+  "glass rounded-full border px-[1.375rem] py-[0.8125rem] text-[0.9375rem] text-cream transition-[border-color] duration-200 ease-soft hover:border-white/35";
 
 export default async function ProjectPage({ params }: Params) {
   const project: Project | undefined = getProject((await params).slug);
@@ -65,7 +64,7 @@ export default async function ProjectPage({ params }: Params) {
                   Read the write-up ↓
                 </a>
               )}
-              {project.appLink && <AppLink link={project.appLink} className={secondary} />}
+              {project.appLink && <AppLink link={project.appLink} className={primary} />}
               <a href={project.githubUrl} target="_blank" rel="noreferrer" className={secondary}>
                 GitHub ↗
               </a>

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const pill =
-  "rounded-full border border-cream/22 bg-ink/35 px-3 py-[0.4375rem] text-cream backdrop-blur-md transition-[border-color] duration-200 ease-soft hover:border-cream/50 aria-[current=page]:border-accent/50 lg:px-4 lg:py-[0.5625rem]";
+  "glass rounded-full border px-3 py-[0.4375rem] text-cream transition-[border-color] duration-200 ease-soft hover:border-white/35 aria-[current=page]:border-white/45 lg:px-4 lg:py-[0.5625rem]";
 
 export function Nav({ onNameClick, back, active, returnTo }: Props) {
   const router = useRouter();
@@ -58,7 +58,7 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
           <span className="sr-only">{site.name}</span>
           <span
             aria-hidden
-            className="grid size-9 place-items-center rounded-full border border-cream/22 bg-ink/35 font-display text-[0.8125rem] font-extrabold tracking-[-.02em] backdrop-blur-md transition-[border-color] duration-200 ease-soft group-hover:border-accent/70 lg:size-10 lg:text-sm"
+            className="grid size-9 place-items-center rounded-full glass border font-display text-[0.8125rem] font-extrabold tracking-[-.02em] transition-[border-color] duration-200 ease-soft group-hover:border-white/45 lg:size-10 lg:text-sm"
           >
             {site.monogram}
           </span>
@@ -81,7 +81,7 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
         </a>
         <a
           href={`mailto:${site.links.email}`}
-          className="rounded-full bg-accent px-3 py-[0.4375rem] font-medium text-on-accent transition-[background-color] duration-200 ease-soft hover:bg-accent-hover lg:px-4 lg:py-[0.5625rem]"
+          className="btn-primary rounded-full px-3 py-[0.4375rem] lg:px-4 lg:py-[0.5625rem]"
         >
           Contact
         </a>

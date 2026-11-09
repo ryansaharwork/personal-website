@@ -3,24 +3,24 @@
 @theme {
   /* Page background. Also every page's top/bottom edge, html/body background-color and theme-color,
      so Safari's overscroll area and toolbar tint continue the page seamlessly. */
-  --color-ink: #0b0a09;
-  --color-panel: #17140f;
-  --color-cream: #f1ebe3;
-  --color-muted: #c7bdb2;
-  --color-dim: #9b928a;
+  --color-ink: #0a0a0a;
+  --color-panel: #161616;
+  --color-cream: #f0f0f0;
+  --color-muted: #bdbdbd;
+  --color-dim: #8e8e8e;
   /* Accent: primary buttons, dots, the selected-tile ring and focus outline; kicker = accent-colored text. */
-  --color-accent: oklch(76% 0.16 45);
-  --color-accent-hover: oklch(82% 0.15 45);
-  --color-on-accent: #1a0e05;
-  --color-kicker: oklch(76% 0.16 45);
-  --color-date: oklch(70% 0.12 45);
-  --color-date-hi: oklch(84% 0.15 45);
+  --color-accent: #f5f5f7;
+  --color-accent-hover: #ffffff;
+  --color-on-accent: #0a0a0a;
+  --color-kicker: #c7c7cc;
+  --color-date: #8e8e8e;
+  --color-date-hi: #e5e5e5;
   /* Placeholder surfaces (screens and image slots without real art yet). */
-  --color-slot: #0f0d0b;
-  --color-slot-fill: #1c1813;
-  --color-slot-text: #7a7067;
-  --color-stripe-a: #1f1a14;
-  --color-stripe-b: #26201a;
+  --color-slot: #101010;
+  --color-slot-fill: #1c1c1c;
+  --color-slot-text: #7a7a7a;
+  --color-stripe-a: #1f1f1f;
+  --color-stripe-b: #262626;
 
   /* Max width of the nav/hero/tile block: 1400px of content plus the 56px (px-14) gutters on each side
      (in rem, so it grows with the root size on large screens: ~1760px of content at 2560px wide). */
@@ -34,17 +34,18 @@
 
 /* Glows and tints. Every accent-tinted color on the site comes from here or from the @theme colors above. */
 :root {
-  --glow-ring: oklch(76% 0.18 45 / 0.6);
-  --glow-dot: oklch(76% 0.18 45);
-  --selection: oklch(76% 0.16 45 / 0.35);
-  --glow-photo: oklch(62% 0.17 45 / 0.5);
-  --glow-photo-soft: oklch(55% 0.15 45 / 0.2);
-  --glow-intro: oklch(40% 0.13 45 / 0.55);
-  --intro-base: #14100d;
-  --glow-about: oklch(45% 0.14 45 / 0.4);
-  --glow-about-2: oklch(32% 0.06 60 / 0.5);
-  --glow-project: oklch(55% 0.16 45 / 0.22);
-  --frame-ring: oklch(76% 0.16 45 / 0.35);
+  --glow-ring: oklch(100% 0 0 / 0.35);
+  --glow-dot: oklch(100% 0 0 / 0.8);
+  --selection: oklch(100% 0 0 / 0.22);
+  --glow-photo: oklch(100% 0 0 / 0.26);
+  --glow-photo-soft: oklch(100% 0 0 / 0.09);
+  --glow-intro: oklch(55% 0 0 / 0.22);
+  --intro-base: #121212;
+  --glow-about: oklch(45% 0 0 / 0.4);
+  --glow-about-2: oklch(32% 0 0 / 0.5);
+  --glow-project: oklch(55% 0 0 / 0.22);
+  --frame-ring: oklch(100% 0 0 / 0.18);
+  --glow-tile: oklch(100% 0 0 / 0.14);
 }
 
 /* Selected tile: dark gap, accent ring, soft glow and lift shadow. */
@@ -66,6 +67,43 @@
 
 @utility glow-dot {
   box-shadow: 0 0 0.75rem var(--glow-dot);
+}
+
+/* Big display headlines: a subtle white-to-silver sheen. Use on an inline span inside the heading: an inline box's
+   background covers the font's full height (so tight leading never clips descenders), and `clone` repeats the
+   gradient on every line. No filter, so it is safe inside morphing elements. */
+@utility text-silver {
+  background-image: linear-gradient(180deg, #fff 30%, #c4c4c9);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Primary button: solid near-white with near-black text, brighter with a soft glow on hover. */
+@utility btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 500;
+  transition:
+    background-color 200ms var(--ease-soft),
+    box-shadow 200ms var(--ease-soft);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-accent-hover);
+      box-shadow: 0 0 1.5rem -0.25rem var(--glow-ring);
+    }
+  }
+}
+
+/* Frosted-glass control (nav pills, monogram, secondary buttons). */
+@utility glass {
+  border-color: rgb(255 255 255 / 0.15);
+  background-color: rgb(255 255 255 / 0.06);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  backdrop-filter: blur(24px) saturate(1.5);
 }
 
 /* Small keyboard-key hint, e.g. ← → / esc / ↵. */

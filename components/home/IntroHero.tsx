@@ -22,9 +22,11 @@ export function IntroHero({ visible }: { visible: boolean }) {
       <div className="flex flex-col gap-2 lg:h-full lg:flex-row lg:items-end lg:gap-0">
         <div className="max-w-[45rem] lg:pb-1 lg:tall:self-center lg:tall:pb-0">
           <h1 className="animate-rise font-display text-[clamp(2.75rem,14.6vw,3.75rem)] leading-[.9] font-extrabold tracking-[-.05em] lg:text-[clamp(4.5rem,min(7.2vw,11.5svh),6.5rem)]">
-            Hi, I&apos;m
-            <br />
-            {site.name}!
+            <span className="text-silver">
+              Hi, I&apos;m
+              <br />
+              {site.name}!
+            </span>
           </h1>
           <p className="animate-rise mt-3.5 text-base leading-[1.4] text-pretty text-muted [--rise-delay:60ms] lg:mt-6 lg:text-[1.375rem]">
             {site.introLine}
@@ -32,7 +34,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           <div className="animate-rise [--rise-delay:120ms]">
             <Link
               href="/about"
-              className="mt-4 inline-flex rounded-full border border-cream/22 bg-ink/35 px-3.5 py-[0.5625rem] text-sm text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50 lg:mt-[1.625rem] lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
+              className="mt-4 inline-flex glass rounded-full border px-3.5 py-[0.5625rem] text-sm text-cream transition-[border-color] duration-200 ease-soft hover:border-white/35 lg:mt-[1.625rem] lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
             >
               More about me →
             </Link>
@@ -42,7 +44,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           </div>
         </div>
 
-        {/* Cutout portrait on a soft accent glow. Above the text on phones; beside it, bleeding up a little, on desktop.
+        {/* Cutout portrait in a soft white studio spotlight. Above the text on phones; beside it, bleeding up a little, on desktop.
             Desktop: the wrapper fills the space right of the text and centers the photo in it. Equal padding on both
             sides keeps the gaps even (and at least that wide); on phones the wrapper is display:contents. */}
         <div className="contents lg:flex lg:flex-1 lg:items-end lg:justify-center lg:self-stretch lg:px-[clamp(1.5rem,3.5vw,3.5rem)]">
@@ -53,7 +55,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           >
             <div
               aria-hidden
-              className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_42%,var(--glow-photo),var(--glow-photo-soft)_55%,transparent)]"
+              className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_40%,var(--glow-photo),var(--glow-photo-soft)_55%,transparent)]"
             />
             {/* Fade out the bottom so the jacket dissolves into the page instead of ending in a hard edge. */}
             <div className="absolute inset-0 [mask-image:linear-gradient(180deg,#000_66%,transparent)]">

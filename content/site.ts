@@ -146,7 +146,7 @@ export const site = {
       year: "2026",
       desc: "A SwiftUI app, a 26-endpoint TypeScript API and a Postgres database on AWS — built solo in three months.",
       long: "A SwiftUI client with zero third-party libraries, a 26-endpoint TypeScript API and a Postgres database on AWS — 11.5K lines in three months, from auth to search.",
-      art: "linear-gradient(135deg,oklch(42% .15 40),oklch(22% .06 35) 60%,#120e0b)",
+      art: "linear-gradient(135deg,oklch(42% 0 0),oklch(22% 0 0) 60%,#0f0f0f)",
       images: { tile: "", hero: "", icon: "/images/valt-icon.webp" },
       // At launch, swap for the App Store link, e.g. { label: "Download on the App Store", href: "https://apps.apple.com/…" }.
       appLink: { label: "Join the beta", href: "https://testflight.apple.com/join/tWpaDD8r", note: "iPhone only · via TestFlight" },
