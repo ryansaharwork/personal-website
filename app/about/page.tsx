@@ -38,11 +38,11 @@ export default function AboutPage() {
             <ImageSlot src={site.photo.src} alt={site.photo.alt} label="photo" sizes="(min-width: 1921px) 360px, 200px" priority position="50% 15%" />
           </div>
           <div>
-            <h1 className="font-display text-[3rem] leading-[.95] font-extrabold tracking-[-.05em] lg:text-[3.75rem]">
-              <span className="text-silver">{site.name}</span>
+            <h1 className="font-display text-[3rem] leading-[.95] font-extrabold tracking-[-.05em] text-title lg:text-[3.75rem]">
+              {site.name}
             </h1>
             <div className="mt-3.5 flex items-center gap-2 text-[0.9375rem] text-muted">
-              <span className="glow-dot breathe size-[0.4375rem] rounded-full bg-accent" />
+              <span className="glow-dot breathe size-[0.4375rem] rounded-full bg-live [--glow-dot:var(--glow-live)]" />
               {site.location} · open to new-grad SWE roles
             </div>
           </div>
