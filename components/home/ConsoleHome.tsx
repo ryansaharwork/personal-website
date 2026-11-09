@@ -130,7 +130,7 @@ export function ConsoleHome() {
       </div>
       <div
         aria-hidden
-        className="fixed inset-0 bg-[linear-gradient(180deg,rgba(11,10,9,.3),rgba(11,10,9,.6)_45%,rgba(11,10,9,.96)_70%)] lg:bg-[radial-gradient(ellipse_at_50%_120%,rgba(11,10,9,.95),rgba(11,10,9,.55)_45%,transparent_75%)]"
+        className="fixed inset-0 bg-[linear-gradient(180deg,color-mix(in_srgb,var(--color-ink)_30%,transparent),color-mix(in_srgb,var(--color-ink)_60%,transparent)_45%,color-mix(in_srgb,var(--color-ink)_96%,transparent)_70%)] lg:bg-[radial-gradient(ellipse_at_50%_120%,color-mix(in_srgb,var(--color-ink)_95%,transparent),color-mix(in_srgb,var(--color-ink)_55%,transparent)_45%,transparent_75%)]"
       />
       {/* Solid ink at the very top and bottom, so the overscroll area continues the page. */}
       <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 h-28 edge-fade-top lg:h-40" />
@@ -177,7 +177,7 @@ function BgLayer({ art, image, on }: { art: string; image?: string; on: boolean 
       className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 ease-soft motion-reduce:transition-none"
       style={{
         opacity: on ? 1 : 0,
-        backgroundImage: image ? `linear-gradient(rgba(11,10,9,.35),rgba(11,10,9,.35)),url(${image})` : art,
+        backgroundImage: image ? `linear-gradient(color-mix(in srgb, var(--color-ink) 35%, transparent),color-mix(in srgb, var(--color-ink) 35%, transparent)),url(${image})` : art,
       }}
     />
   );

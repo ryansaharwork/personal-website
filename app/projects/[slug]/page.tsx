@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 const primary =
-  "rounded-full bg-ember px-[1.375rem] py-[0.8125rem] text-[0.9375rem] font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi";
+  "rounded-full bg-accent px-[1.375rem] py-[0.8125rem] text-[0.9375rem] font-medium text-on-accent transition-[background-color] duration-200 ease-soft hover:bg-accent-hover";
 const secondary =
   "rounded-full border border-cream/22 bg-ink/35 px-[1.375rem] py-[0.8125rem] text-[0.9375rem] text-cream transition-[border-color] duration-200 ease-soft hover:border-cream/50";
 
@@ -40,7 +40,7 @@ export default async function ProjectPage({ params }: Params) {
             <ImageSlot src={project.images.hero} alt="" label="" />
           </div>
         )}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_72%_50%,oklch(55%_.16_45/.22),transparent_55%),linear-gradient(90deg,rgba(11,10,9,.85)_0%,rgba(11,10,9,.5)_50%,rgba(11,10,9,.15)_100%),linear-gradient(0deg,#0b0a09,transparent_30%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_72%_50%,var(--glow-project),transparent_55%),linear-gradient(90deg,color-mix(in_srgb,var(--color-ink)_85%,transparent)_0%,color-mix(in_srgb,var(--color-ink)_50%,transparent)_50%,color-mix(in_srgb,var(--color-ink)_15%,transparent)_100%),linear-gradient(0deg,var(--color-ink),transparent_30%)]" />
         {/* Solid ink at the very top, so the overscroll area continues the page. */}
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-32 edge-fade-top lg:h-44" />
 
@@ -50,7 +50,7 @@ export default async function ProjectPage({ params }: Params) {
 
         <div className="relative mx-auto grid max-w-site gap-10 px-5 pt-12 pb-10 lg:absolute lg:inset-x-0 lg:top-[6.875rem] lg:bottom-10 lg:grid-cols-[minmax(0,35rem)_1fr] lg:items-center lg:px-14 lg:py-0">
           <div>
-            <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[0.8125rem]">
+            <div className="text-xs font-medium tracking-[.08em] text-kicker uppercase lg:text-[0.8125rem]">
               {project.kicker} · {project.year}
             </div>
             <TitleLockup project={project} as="h1" className="mt-3 text-[4rem] lg:mt-4 lg:text-[clamp(4.5rem,7.2vw,6.5rem)]" />
@@ -82,7 +82,7 @@ export default async function ProjectPage({ params }: Params) {
           {hasProjectMedia(project) ? (
             <ProjectMedia project={project} />
           ) : (
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-[40rem] overflow-hidden rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)]">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-[40rem] overflow-hidden rounded-3xl shadow-[0_0_0_1px_var(--frame-ring),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)]">
               <ImageSlot src={project.images.hero} alt={`${project.title} hero art`} label={`${project.title} — hero art 4:3`} sizes="(min-width: 1024px) 640px, 100vw" priority />
             </div>
           )}

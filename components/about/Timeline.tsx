@@ -13,9 +13,9 @@ export function Timeline({ items }: { items: Experience[] }) {
           <div tabIndex={0} className={`${row} transition-[background-color] duration-[250ms] ease-soft hover:bg-cream/5 focus:bg-cream/5`}>
             <span
               aria-hidden
-              className="absolute top-[1.125rem] bottom-[1.125rem] left-0 w-0.5 origin-top scale-y-0 rounded-sm bg-ember transition-transform duration-[250ms] ease-soft group-hover:scale-y-100 group-focus:scale-y-100 motion-reduce:transition-none"
+              className="absolute top-[1.125rem] bottom-[1.125rem] left-0 w-0.5 origin-top scale-y-0 rounded-sm bg-accent transition-transform duration-[250ms] ease-soft group-hover:scale-y-100 group-focus:scale-y-100 motion-reduce:transition-none"
             />
-            <div className="pt-1 text-sm text-ember-date transition-colors duration-[250ms] ease-soft group-hover:text-ember-date-hi group-focus:text-ember-date-hi">
+            <div className="pt-1 text-sm text-date transition-colors duration-[250ms] ease-soft group-hover:text-date-hi group-focus:text-date-hi">
               {r.when}
             </div>
             <div>

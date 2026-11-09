@@ -30,7 +30,7 @@ export function ImageSlot({ src, alt, label, sizes = "100vw", priority, position
     <div
       role="img"
       aria-label={alt}
-      className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(135deg,#1f1a14_0_0.625rem,#26201a_0.625rem_1.25rem)] p-3 text-center font-mono text-[0.6875rem] text-dim"
+      className="absolute inset-0 flex items-center justify-center bg-[repeating-linear-gradient(135deg,var(--color-stripe-a)_0_0.625rem,var(--color-stripe-b)_0.625rem_1.25rem)] p-3 text-center font-mono text-[0.6875rem] text-dim"
     >
       {label}
     </div>

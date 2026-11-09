@@ -20,7 +20,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
     >
       <div className="flex h-full flex-col justify-end gap-4 lg:flex-row lg:items-end lg:gap-0">
         <div className="lg:max-w-[min(47.5rem,56%)] lg:flex-none lg:tall:self-center">
-          <div className="text-xs font-medium tracking-[.08em] text-ember uppercase lg:text-[0.8125rem]">{project.kicker}</div>
+          <div className="text-xs font-medium tracking-[.08em] text-kicker uppercase lg:text-[0.8125rem]">{project.kicker}</div>
           <TitleLockup
             project={project}
             as="h2"
@@ -32,7 +32,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
             <button
               type="button"
               onClick={onOpen}
-              className="inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-ember px-4 py-2.5 text-sm font-medium text-on-ember transition-[background-color] duration-200 ease-soft hover:bg-ember-hi lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
+              className="inline-flex cursor-pointer items-center gap-2.5 rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-on-accent transition-[background-color] duration-200 ease-soft hover:bg-accent-hover lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
             >
               {project.playUrl ? "Play now" : "Read the write-up"}
             </button>

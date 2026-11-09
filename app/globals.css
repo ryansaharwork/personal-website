@@ -8,11 +8,19 @@
   --color-cream: #f1ebe3;
   --color-muted: #c7bdb2;
   --color-dim: #9b928a;
-  --color-ember: oklch(76% 0.16 45);
-  --color-ember-hi: oklch(82% 0.15 45);
-  --color-ember-date: oklch(70% 0.12 45);
-  --color-ember-date-hi: oklch(84% 0.15 45);
-  --color-on-ember: #1a0e05;
+  /* Accent: primary buttons, dots, the selected-tile ring and focus outline; kicker = accent-colored text. */
+  --color-accent: oklch(76% 0.16 45);
+  --color-accent-hover: oklch(82% 0.15 45);
+  --color-on-accent: #1a0e05;
+  --color-kicker: oklch(76% 0.16 45);
+  --color-date: oklch(70% 0.12 45);
+  --color-date-hi: oklch(84% 0.15 45);
+  /* Placeholder surfaces (screens and image slots without real art yet). */
+  --color-slot: #0f0d0b;
+  --color-slot-fill: #1c1813;
+  --color-slot-text: #7a7067;
+  --color-stripe-a: #1f1a14;
+  --color-stripe-b: #26201a;
 
   /* Max width of the nav/hero/tile block: 1400px of content plus the 56px (px-14) gutters on each side
      (in rem, so it grows with the root size on large screens: ~1760px of content at 2560px wide). */
@@ -24,31 +32,46 @@
   --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Selected tile: dark gap, ember ring, soft glow and lift shadow. */
-@utility shadow-ember-ring {
+/* Glows and tints. Every accent-tinted color on the site comes from here or from the @theme colors above. */
+:root {
+  --glow-ring: oklch(76% 0.18 45 / 0.6);
+  --glow-dot: oklch(76% 0.18 45);
+  --selection: oklch(76% 0.16 45 / 0.35);
+  --glow-photo: oklch(62% 0.17 45 / 0.5);
+  --glow-photo-soft: oklch(55% 0.15 45 / 0.2);
+  --glow-intro: oklch(40% 0.13 45 / 0.55);
+  --intro-base: #14100d;
+  --glow-about: oklch(45% 0.14 45 / 0.4);
+  --glow-about-2: oklch(32% 0.06 60 / 0.5);
+  --glow-project: oklch(55% 0.16 45 / 0.22);
+  --frame-ring: oklch(76% 0.16 45 / 0.35);
+}
+
+/* Selected tile: dark gap, accent ring, soft glow and lift shadow. */
+@utility shadow-accent-ring {
   box-shadow:
     0 0 0 2px var(--color-ink),
-    0 0 0 4px var(--color-ember),
-    0 0 2.5rem -0.375rem oklch(76% 0.18 45 / 0.6),
+    0 0 0 4px var(--color-accent),
+    0 0 2.5rem -0.375rem var(--glow-ring),
     0 1.875rem 3.125rem -1.25rem rgb(0 0 0 / 0.9);
 }
 
 @utility shadow-hairline {
-  box-shadow: 0 0 0 1px rgb(241 235 227 / 0.1);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-cream) 10%, transparent);
 }
 
 @utility shadow-card {
-  box-shadow: inset 0 1px 0 rgb(241 235 227 / 0.06);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-cream) 6%, transparent);
 }
 
 @utility glow-dot {
-  box-shadow: 0 0 0.75rem oklch(76% 0.18 45);
+  box-shadow: 0 0 0.75rem var(--glow-dot);
 }
 
 /* Small keyboard-key hint, e.g. ← → / esc / ↵. */
 @utility kbd {
   font: 0.75rem ui-monospace, Menlo, monospace;
-  border: 1px solid rgb(241 235 227 / 0.2);
+  border: 1px solid color-mix(in srgb, var(--color-cream) 20%, transparent);
   border-radius: 0.3125rem;
   padding: 1px 0.375rem;
   color: var(--color-muted);
@@ -60,9 +83,9 @@
   background-image: linear-gradient(
     180deg,
     var(--color-ink) 0 4px,
-    rgb(11 10 9 / 0.85) 30%,
-    rgb(11 10 9 / 0.45) 65%,
-    rgb(11 10 9 / 0)
+    color-mix(in srgb, var(--color-ink) 85%, transparent) 30%,
+    color-mix(in srgb, var(--color-ink) 45%, transparent) 65%,
+    color-mix(in srgb, var(--color-ink) 0%, transparent)
   );
 }
 
@@ -70,9 +93,9 @@
   background-image: linear-gradient(
     0deg,
     var(--color-ink) 0 4px,
-    rgb(11 10 9 / 0.85) 30%,
-    rgb(11 10 9 / 0.45) 65%,
-    rgb(11 10 9 / 0)
+    color-mix(in srgb, var(--color-ink) 85%, transparent) 30%,
+    color-mix(in srgb, var(--color-ink) 45%, transparent) 65%,
+    color-mix(in srgb, var(--color-ink) 0%, transparent)
   );
 }
 
@@ -123,10 +146,10 @@
     font-family: var(--font-sans);
   }
   ::selection {
-    background: oklch(76% 0.16 45 / 0.35);
+    background: var(--selection);
   }
   :focus-visible {
-    outline: 2px solid var(--color-ember);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 }

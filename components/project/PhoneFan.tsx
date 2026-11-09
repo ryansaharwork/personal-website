@@ -118,23 +118,23 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
 }
 
 function PlaceholderScreen({ screen, appName }: { screen: PhoneScreen; appName: string }) {
-  const tile = "aspect-[3/4] rounded-[0.625rem] bg-[repeating-linear-gradient(135deg,#1f1a14_0_0.5rem,#26201a_0.5rem_1rem)]";
+  const tile = "aspect-[3/4] rounded-[0.625rem] bg-[repeating-linear-gradient(135deg,var(--color-stripe-a)_0_0.5rem,var(--color-stripe-b)_0.5rem_1rem)]";
   return (
-    <div className="h-full bg-[#0f0d0b] px-5 pt-[4.375rem] text-cream" aria-label={`${screen.title} screenshot placeholder`}>
+    <div className="h-full bg-slot px-5 pt-[4.375rem] text-cream" aria-label={`${screen.title} screenshot placeholder`}>
       <div className="flex items-baseline justify-between">
         <span className="text-[2.125rem] font-semibold tracking-[-.02em]">{screen.title}</span>
-        <span className="text-[0.9375rem] text-ember">{appName}</span>
+        <span className="text-[0.9375rem] text-kicker">{appName}</span>
       </div>
-      <div className="mt-[1.125rem] flex h-10 items-center rounded-xl bg-[#1c1813] px-3.5 text-[0.9375rem] text-[#7a7067]">{screen.hint}</div>
+      <div className="mt-[1.125rem] flex h-10 items-center rounded-xl bg-slot-fill px-3.5 text-[0.9375rem] text-slot-text">{screen.hint}</div>
       <div className="mt-[1.625rem] grid grid-cols-3 gap-3">
         <div className={tile} />
         <div className={tile} />
         <div className={tile} />
       </div>
       <div className="mt-[1.375rem] flex flex-col gap-3">
-        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
-        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
-        <div className="h-[3.625rem] rounded-[0.625rem] bg-[#1c1813]" />
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-slot-fill" />
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-slot-fill" />
+        <div className="h-[3.625rem] rounded-[0.625rem] bg-slot-fill" />
       </div>
     </div>
   );

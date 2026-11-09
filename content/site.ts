@@ -305,7 +305,7 @@ export const site = {
 
   /** Background behind the homepage intro (no tile selected). */
   introArt:
-    "radial-gradient(ellipse at 80% 30%,oklch(40% .13 45 / .55),transparent 50%),linear-gradient(180deg,#14100d,#0b0a09)",
+    "radial-gradient(ellipse at 80% 30%,var(--glow-intro),transparent 50%),linear-gradient(180deg,var(--intro-base),var(--color-ink))",
 };
 
 export function getProject(slug: string) {

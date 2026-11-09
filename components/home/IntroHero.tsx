@@ -42,7 +42,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           </div>
         </div>
 
-        {/* Cutout portrait on a soft ember glow. Above the text on phones; beside it, bleeding up a little, on desktop.
+        {/* Cutout portrait on a soft accent glow. Above the text on phones; beside it, bleeding up a little, on desktop.
             Desktop: the wrapper fills the space right of the text and centers the photo in it. Equal padding on both
             sides keeps the gaps even (and at least that wide); on phones the wrapper is display:contents. */}
         <div className="contents lg:flex lg:flex-1 lg:items-end lg:justify-center lg:self-stretch lg:px-[clamp(1.5rem,3.5vw,3.5rem)]">
@@ -53,7 +53,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
           >
             <div
               aria-hidden
-              className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_42%,oklch(62%_.17_45/.5),oklch(55%_.15_45/.2)_55%,transparent)]"
+              className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_42%,var(--glow-photo),var(--glow-photo-soft)_55%,transparent)]"
             />
             {/* Fade out the bottom so the jacket dissolves into the page instead of ending in a hard edge. */}
             <div className="absolute inset-0 [mask-image:linear-gradient(180deg,#000_66%,transparent)]">

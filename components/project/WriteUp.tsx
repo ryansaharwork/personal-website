@@ -4,7 +4,7 @@ import type { PhoneScreen, Project } from "@/content/site";
 import { Reveal } from "@/components/Reveal";
 import { IPhoneFrame } from "./IPhoneFrame";
 
-const label = "mb-5 text-xs font-medium tracking-[.08em] text-ember uppercase";
+const label = "mb-5 text-xs font-medium tracking-[.08em] text-kicker uppercase";
 const card = "rounded-[1.125rem] border border-cream/10 bg-panel shadow-card";
 
 export function WriteUp({ project }: { project: Project }) {
@@ -29,7 +29,7 @@ export function WriteUp({ project }: { project: Project }) {
           {w.arch.map((n, i) => (
             <Fragment key={n.title + i}>
               {i > 0 && (
-                <div aria-hidden className="flex-none self-center text-lg text-ember">
+                <div aria-hidden className="flex-none self-center text-lg text-kicker">
                   <span className="md:hidden">↓</span>
                   <span className="hidden md:inline">→</span>
                 </div>
@@ -52,7 +52,7 @@ export function WriteUp({ project }: { project: Project }) {
               key={c.title + i}
               className={`${card} flex min-h-[12.5rem] flex-col justify-between gap-4 rounded-[1.375rem] p-7`}
             >
-              <div className="font-mono text-[0.8125rem] text-ember">{String(i + 1).padStart(2, "0")}</div>
+              <div className="font-mono text-[0.8125rem] text-kicker">{String(i + 1).padStart(2, "0")}</div>
               <div>
                 <h3 className="font-display text-2xl leading-[1.05] font-bold tracking-[-.03em]">{c.title}</h3>
                 <p className="mt-2.5 text-[0.9375rem] leading-normal text-pretty text-muted">{c.body}</p>

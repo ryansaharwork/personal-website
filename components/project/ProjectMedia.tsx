@@ -39,7 +39,7 @@ export function ProjectMedia({ project, fit = false, named = true }: MediaProps)
       />
     );
   } else if (project.images.hero) {
-    frame = `relative aspect-[4/3] rounded-3xl shadow-[0_0_0_1px_oklch(76%_.16_45/.35),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[30rem] max-w-full" : "mx-auto w-full max-w-[40rem]"}`;
+    frame = `relative aspect-[4/3] rounded-3xl shadow-[0_0_0_1px_var(--frame-ring),0_2.5rem_5rem_-1.875rem_rgba(0,0,0,.8)] ${fit ? "h-full max-h-[30rem] max-w-full" : "mx-auto w-full max-w-[40rem]"}`;
     media = (
       <div className="relative h-full w-full overflow-hidden rounded-3xl">
         <ImageSlot

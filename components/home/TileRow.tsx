@@ -45,13 +45,13 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
                 onSelect(i);
               }
             }}
-            className="animate-rise group @container relative h-[10rem] w-[8.125rem] flex-none snap-start overflow-hidden rounded-[1.125rem] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-ember-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[15rem] lg:w-auto lg:min-w-[10rem] lg:flex-1 lg:basis-0 lg:rounded-[1.375rem]"
+            className="animate-rise group @container relative h-[10rem] w-[8.125rem] flex-none snap-start overflow-hidden rounded-[1.125rem] shadow-hairline outline-none transition-[translate,scale,box-shadow,opacity] duration-300 ease-soft [transform-origin:50%_100%] data-[active=true]:shadow-accent-ring data-[dim=true]:opacity-55 motion-safe:data-[active=true]:-translate-y-2 motion-safe:data-[active=true]:scale-105 motion-reduce:transition-[box-shadow,opacity] lg:aspect-square lg:h-auto lg:max-h-[15rem] lg:w-auto lg:min-w-[10rem] lg:flex-1 lg:basis-0 lg:rounded-[1.375rem]"
           >
             <div
               className="absolute inset-0 bg-cover bg-center transition-[scale] duration-[1400ms] ease-soft motion-safe:group-data-[active=true]:scale-110"
               style={{ backgroundImage: p.images.tile ? `url(${p.images.tile})` : p.art }}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(11,10,9,.75))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,color-mix(in_srgb,var(--color-ink)_75%,transparent))]" />
             {/* App icon, centered in the space above the label. No percentage heights/offsets (Safari resolves
                 those against an aspect-ratio height inconsistently): a flex container centers it, the bottom padding
                 keeps the label clear, and the size is explicit. On desktop the tile is square up to 240px tall, so
