@@ -21,10 +21,11 @@ export function IntroHero({ visible }: { visible: boolean }) {
     >
       <div className="flex flex-col gap-2 lg:h-full lg:flex-row lg:items-end lg:gap-0">
         <div className="max-w-[45rem] lg:w-[45rem] lg:pb-1 lg:tall:self-center lg:tall:pb-0">
-          <h1 className="animate-rise font-display text-[clamp(2.75rem,14.6vw,3.75rem)] leading-[.9] font-extrabold tracking-[-.05em] text-title lg:text-[clamp(4.5rem,min(7.2vw,11.5svh),6.5rem)]">
-            Hi, I&apos;m
-            <br />
-            {site.name}!
+          {/* Desktop size is 1.25x the original clamp. On tall screens the block is centered, so the extra height (0.9
+              line height x 20% of the new size = 0.18em) is taken back with a negative top margin: the block keeps its
+              height and the button and hint stay where they were; the name grows upward into the space above. */}
+          <h1 className="animate-rise font-display text-[clamp(2.75rem,14.6vw,3.75rem)] leading-[.9] font-extrabold tracking-[-.05em] text-title lg:text-[clamp(5.625rem,min(9vw,14.375svh),8.125rem)] lg:tall:-mt-[0.18em]">
+            {site.name}
           </h1>
           <p className="animate-rise mt-3.5 text-base leading-[1.4] text-pretty text-muted [--rise-delay:60ms] lg:mt-6 lg:text-[1.375rem]">
             {site.introLine}
