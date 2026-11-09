@@ -39,7 +39,7 @@ export function ProjectHero({ project, visible, onOpen }: Props) {
             {project.appLink && (
               <AppLink
                 link={project.appLink}
-                className="btn-primary inline-flex rounded-full px-3.5 py-[0.5625rem] text-sm lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
+                className="glass inline-flex rounded-full border px-3.5 py-[0.5625rem] text-sm text-cream transition-[border-color] duration-200 ease-soft hover:border-white/35 lg:px-[1.125rem] lg:py-[0.6875rem] lg:text-[0.9375rem]"
               />
             )}
             <span className="hidden h-10 items-center gap-1.5 text-[0.8125rem] text-dim lg:h-11 [@media(hover:hover)]:flex">

@@ -64,7 +64,7 @@ export default async function ProjectPage({ params }: Params) {
                   Read the write-up ↓
                 </a>
               )}
-              {project.appLink && <AppLink link={project.appLink} className={primary} />}
+              {project.appLink && <AppLink link={project.appLink} className={secondary} />}
               <a href={project.githubUrl} target="_blank" rel="noreferrer" className={secondary}>
                 GitHub ↗
               </a>
