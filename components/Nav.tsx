@@ -63,7 +63,7 @@ export function Nav({ onNameClick, back, active, returnTo }: Props) {
             {site.monogram}
           </span>
           <span className="hidden items-center gap-[0.4375rem] text-[0.8125rem] text-muted md:flex">
-            <span className="glow-dot size-[0.4375rem] rounded-full bg-accent" />
+            <span className="glow-dot breathe size-[0.4375rem] rounded-full bg-accent" />
             {site.status}
           </span>
         </Link>

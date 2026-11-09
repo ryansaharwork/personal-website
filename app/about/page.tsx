@@ -42,7 +42,7 @@ export default function AboutPage() {
               <span className="text-silver">{site.name}</span>
             </h1>
             <div className="mt-3.5 flex items-center gap-2 text-[0.9375rem] text-muted">
-              <span className="glow-dot size-[0.4375rem] rounded-full bg-accent" />
+              <span className="glow-dot breathe size-[0.4375rem] rounded-full bg-accent" />
               {site.location} · open to new-grad SWE roles
             </div>
           </div>
@@ -51,7 +51,10 @@ export default function AboutPage() {
             <h2 className={`${label} mb-3`}>Skills</h2>
             <ul className="flex flex-wrap gap-2 text-sm">
               {site.skills.map((s) => (
-                <li key={s} className="rounded-full border border-cream/16 px-[0.8125rem] py-[0.4375rem]">
+                <li
+                  key={s}
+                  className="rounded-full border border-cream/16 px-[0.8125rem] py-[0.4375rem] transition-[translate,background-color,border-color] duration-400 ease-glide hover:border-white/80 hover:bg-white/[.06] motion-safe:hover:-translate-y-0.5"
+                >
                   {s}
                 </li>
               ))}

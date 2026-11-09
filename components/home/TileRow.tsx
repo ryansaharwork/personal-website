@@ -34,7 +34,7 @@ export function TileRow({ projects, active, tileRefs, onHover, onFocusTile, onSe
             data-dim={any && !on}
             aria-current={on ? "true" : undefined}
             // Page-load stagger, after the intro text and photo.
-            style={{ "--rise-delay": `${240 + i * 40}ms` } as React.CSSProperties}
+            style={{ "--rise-delay": `${240 + i * 40}ms`, "--tile-glow": p.glow } as React.CSSProperties}
             onPointerEnter={(e) => e.pointerType === "mouse" && onHover(i)}
             // Cursor light: position it in the tile's own (unscaled) pixels. A CSS variable, so no re-render.
             onPointerMove={(e) => {

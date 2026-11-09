@@ -27,6 +27,8 @@ export type Project = {
   /** Slightly longer intro on the project page. */
   long: string;
   art: string;
+  /** Soft halo in the tile's own color when it is hovered or selected (~25% opacity). */
+  glow: string;
   images: {
     tile: string;
     hero: string;
@@ -147,6 +149,7 @@ export const site = {
       desc: "A SwiftUI app, a 26-endpoint TypeScript API and a Postgres database on AWS — built solo in three months.",
       long: "A SwiftUI client with zero third-party libraries, a 26-endpoint TypeScript API and a Postgres database on AWS — 11.5K lines in three months, from auth to search.",
       art: "linear-gradient(135deg,oklch(42% 0 0),oklch(22% 0 0) 60%,#0f0f0f)",
+      glow: "oklch(92% 0 0 / 0.22)",
       images: { tile: "", hero: "", icon: "/images/valt-icon.webp" },
       // At launch, swap for the App Store link, e.g. { label: "Download on the App Store", href: "https://apps.apple.com/…" }.
       appLink: { label: "Join the beta", href: "https://testflight.apple.com/join/tWpaDD8r", note: "iPhone only · via TestFlight" },
@@ -198,6 +201,7 @@ export const site = {
       desc: "Playable projects from my game development class at USC.",
       long: "[One or two lines on the games: how many, what they are, and where they run.]",
       art: "linear-gradient(135deg,oklch(38% .14 20),oklch(20% .05 15) 60%,#120b0b)",
+      glow: "oklch(58% 0.2 20 / 0.28)",
       images: { tile: "", hero: "" },
       // TODO: link to where the games can be played.
       playUrl: "#",
@@ -226,6 +230,7 @@ export const site = {
       desc: "[One line on what the engine does.]",
       long: "[One or two lines on the engine: language, subsystems and why you built it.]",
       art: "linear-gradient(135deg,oklch(36% .05 250),oklch(20% .03 250) 60%,#0d0e12)",
+      glow: "oklch(62% 0.1 250 / 0.28)",
       images: { tile: "", hero: "" },
       githubUrl: "https://github.com/ryansaharwork",
       facts: [{ value: "[language]", label: "" }],
@@ -252,6 +257,7 @@ export const site = {
       desc: "Temperature monitors in bare-metal C, with the 1-Wire protocol written from scratch.",
       long: "Bare-metal C on an ATmega328P. The Dallas 1-Wire protocol bit-banged from scratch, five interrupt sources synchronized to one main loop.",
       art: "linear-gradient(135deg,oklch(38% .10 140),oklch(20% .04 140) 60%,#0b100d)",
+      glow: "oklch(62% 0.15 140 / 0.26)",
       images: { tile: "", hero: "" },
       githubUrl: "https://github.com/ryansaharwork",
       facts: [
@@ -281,6 +287,7 @@ export const site = {
       desc: "Secured a WeCom webhook and built chat-driven CMS updates for non-technical staff.",
       long: "Signature-verification middleware for an exposed WeCom webhook, and a chat-driven flow so staff can update the CMS from WeCom. TypeScript, Express, Vitest.",
       art: "linear-gradient(135deg,oklch(40% .10 300),oklch(20% .04 300) 60%,#0f0c12)",
+      glow: "oklch(60% 0.14 300 / 0.28)",
       images: { tile: "", hero: "" },
       githubUrl: "https://github.com/ryansaharwork",
       facts: [
