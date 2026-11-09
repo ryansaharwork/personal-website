@@ -94,6 +94,8 @@ export function PhoneFan({ screens, appName, fit = false, interactive = true }: 
                       loading="eager"
                       decoding="sync"
                       preload={!fit}
+                      // On the homepage (fit) the fan is hidden until a project is selected: load it, but after the headshot.
+                      fetchPriority={fit ? "low" : undefined}
                       className="object-cover"
                     />
                   </div>

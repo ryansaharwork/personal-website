@@ -1,8 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { site } from "@/content/site";
 
 export function IntroHero({ visible }: { visible: boolean }) {
+  // The full cutout fades in over its tiny inline placeholder once loaded. The ref check covers an image that
+  // finished loading before React hydrated (its load event would already have fired).
+  const [photoLoaded, setPhotoLoaded] = useState(false);
+  const photoRef = useCallback((img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth > 0) setPhotoLoaded(true);
+  }, []);
   return (
     <section
       aria-hidden={!visible}
@@ -48,13 +57,32 @@ export function IntroHero({ visible }: { visible: boolean }) {
             />
             {/* Fade out the bottom so the jacket dissolves into the page instead of ending in a hard edge. */}
             <div className="absolute inset-0 [mask-image:linear-gradient(180deg,#000_66%,transparent)]">
+              {/* Inline ~400-byte placeholder: paints with the page, no request. Blurred so the 24px image reads as a
+                  soft silhouette; transparent around the figure, so it sits on the glow. */}
+              <img
+                data-photo-placeholder
+                src={site.photo.cutoutPlaceholder}
+                alt=""
+                aria-hidden
+                className="absolute inset-0 size-full object-contain object-bottom blur-[0.6rem] transition-opacity duration-500 ease-soft"
+                style={{ opacity: photoLoaded ? 0 : 1 }}
+              />
+              {/* Highest-priority image on the page; sizes picks ~828px on a 2x laptop, the full file only at 3840. */}
               <Image
+                ref={photoRef}
+                data-photo-full
                 src={site.photo.cutout}
                 alt={site.photo.alt}
                 fill
-                sizes="(min-width: 1921px) 1100px, (min-width: 1024px) 560px, 210px"
-                priority
-                className="object-contain object-bottom"
+                sizes="(min-width: 1921px) 1100px, (min-width: 1600px) 560px, (min-width: 1024px) 400px, 210px"
+                preload
+                fetchPriority="high"
+                loading="eager"
+                // next/image also calls onLoad after a failed load (it awaits decode() and ignores the rejection), so
+                // only count it if the image has pixels; on failure the placeholder stays and the broken image stays hidden.
+                onLoad={(e) => e.currentTarget.naturalWidth > 0 && setPhotoLoaded(true)}
+                className="object-contain object-bottom transition-opacity duration-400 ease-soft"
+                style={{ opacity: photoLoaded ? 1 : 0 }}
               />
             </div>
           </div>

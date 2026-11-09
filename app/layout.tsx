@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* Without JS, scroll-in content would stay hidden. */}
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}[data-photo-full]{opacity:1!important}[data-photo-placeholder]{opacity:0!important}`}</style>
         </noscript>
       </body>
     </html>

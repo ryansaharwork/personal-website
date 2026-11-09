@@ -9,6 +9,7 @@ Everything on the site lives in **`content/site.ts`**: bio, links, skills, exper
 - Text in `[square brackets]` is a placeholder. Replace it before launch.
 - Images go in `public/images/`. Set the matching `src` field, for example `photo: { src: "/images/photo.jpg" }`. An empty `src` shows a labelled placeholder box.
   - `photo`: hero photo (3:4) and About avatar
+  - `photo.cutoutPlaceholder`: a ~400-byte inline preview shown until the hero cutout loads. Regenerate it with `npm run placeholder` whenever the cutout changes, and paste the printed data URI.
   - `photo.srcSize` / `photo.cutoutSize`: the files' pixel sizes. The photo is never displayed larger than half its pixels (so it stays sharp on 2x screens); update these if you replace the images. The current files are a 4x upscale of the original (Real-ESRGAN x4plus blended 50/50 with a plain enlargement).
   - `projects[].images.tile`: home-screen tile art (square)
   - `projects[].images.icon`: optional square app icon (transparent PNG/WebP with its own rounded corners), shown on the home tile and next to the project title

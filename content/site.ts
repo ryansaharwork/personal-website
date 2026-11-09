@@ -85,6 +85,9 @@ export const site = {
     srcSize: [1744, 2326],
     cutout: "/images/photo-cutout-hd.webp",
     cutoutSize: [2324, 2600],
+    /** Tiny blurred stand-in shown until the cutout loads (keeps transparency). Regenerate: npm run placeholder */
+    cutoutPlaceholder:
+      "data:image/webp;base64,UklGRpIBAABXRUJQVlA4WAoAAAAQAAAAFwAAGgAAQUxQSKAAAAARf6C4bRs3ln/vyV1EBBS3JkcK/8QhuKm2bVle3HV0AlgNNirQABrobLPTABr8G4eVBL672zO87/dRIaL/E0B/p7r5sCI1/8EwSwsAaJqFK9tbWPArmIU3W5K4ZYY0ZRVpzJJSmXml4BswLBLdgAIpp0BO1QEmqg0Ah9T4ASix4AxihIh2kJc2orcCIwpCM13UaY91Riud9lmnctNpP7UAVlA4IMwAAACwBQCdASoYABsAPrVInkmnJCKhMBgMAOAWiWIAzB2MO1ossw/h7YEuxf/2AiKQcWqUFA2apQAA/vtn99+FYZ7ta5T89ccjbMbUFu8ajIRANyS6gF4be/7BXg2iNFqhYr2EU2Tx2dq2p6LIhJoZcI09ChB5wsW8IpExYdR2smgeQEnneu7Iy5CuBIei7c7y48meRUhQ7z9iE4pbalZ/m2Ki2hjr4i7BbkHmuyFphKkt8Xf8uuddOhnv+lhIZPXfwARe+xIpQBxmHioAAAA=",
     alt: "Ryan Sahar",
   },
 
