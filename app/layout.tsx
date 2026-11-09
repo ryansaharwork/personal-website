@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: { default: site.name, template: `%s · ${site.name}` },
-  description: site.introLine,
+  description: site.description,
 };
 
 export const viewport: Viewport = {

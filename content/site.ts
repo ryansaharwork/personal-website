@@ -72,7 +72,9 @@ export const site = {
   name: "Ryan Sahar",
   status: "Open to new-grad SWE roles · CA",
   location: "Davis, CA",
-  introLine: "I build iOS apps, game engines and the backends under them. USC CS '26, Davis, CA.",
+  introLine: "Software engineer. USC CS '26.",
+  /** Meta description (search results, link previews). */
+  description: "I build iOS apps, game engines and the backends under them. USC CS '26, Davis, CA.",
   bio: "I'm a software engineer who graduated from USC with a B.S. in Computer Science in May 2026. I like owning the whole stack — Valt is a SwiftUI app, a TypeScript API and a Postgres database, and I built all three. Most recently I've been leading an engineering team and making slow dashboards fast.",
   /** Initials shown as the home link in the top-left nav. */
   monogram: "RS",

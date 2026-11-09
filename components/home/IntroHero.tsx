@@ -20,7 +20,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
       style={{ opacity: visible ? 1 : 0 }}
     >
       <div className="flex flex-col gap-2 lg:h-full lg:flex-row lg:items-end lg:gap-0">
-        <div className="max-w-[45rem] lg:pb-1 lg:tall:self-center lg:tall:pb-0">
+        <div className="max-w-[45rem] lg:w-[45rem] lg:pb-1 lg:tall:self-center lg:tall:pb-0">
           <h1 className="animate-rise font-display text-[clamp(2.75rem,14.6vw,3.75rem)] leading-[.9] font-extrabold tracking-[-.05em] text-title lg:text-[clamp(4.5rem,min(7.2vw,11.5svh),6.5rem)]">
             Hi, I&apos;m
             <br />
