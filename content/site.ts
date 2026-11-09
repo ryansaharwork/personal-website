@@ -74,8 +74,19 @@ export const site = {
   bio: "I'm a software engineer who graduated from USC with a B.S. in Computer Science in May 2026. I like owning the whole stack — Valt is a SwiftUI app, a TypeScript API and a Postgres database, and I built all three. Most recently I've been leading an engineering team and making slow dashboards fast.",
   /** Initials shown as the home link in the top-left nav. */
   monogram: "RS",
-  /** `src`: framed 3:4 headshot (About avatar). `cutout`: transparent background, homepage hero. */
-  photo: { src: "/images/photo.webp", cutout: "/images/photo-cutout.webp", alt: "Ryan Sahar" },
+  /**
+   * `src`: framed 3:4 headshot (About avatar). `cutout`: transparent background, homepage hero.
+   * `srcSize` / `cutoutSize`: the files' pixel sizes [width, height]; they cap how large each photo is
+   * displayed (half its pixels, so it stays sharp on 2x screens). Update them if you swap the images.
+   * Both are a 4x upscale of the 581px original (Real-ESRGAN x4plus blended 50/50 with a plain enlargement).
+   */
+  photo: {
+    src: "/images/photo-hd.webp",
+    srcSize: [1744, 2326],
+    cutout: "/images/photo-cutout-hd.webp",
+    cutoutSize: [2324, 2600],
+    alt: "Ryan Sahar",
+  },
 
   links: {
     email: "ryansaharwork@gmail.com",

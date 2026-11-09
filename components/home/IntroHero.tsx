@@ -37,7 +37,11 @@ export function IntroHero({ visible }: { visible: boolean }) {
             Desktop: the wrapper fills the space right of the text and centers the photo in it. Equal padding on both
             sides keeps the gaps even (and at least that wide); on phones the wrapper is display:contents. */}
         <div className="contents lg:flex lg:flex-1 lg:items-end lg:justify-center lg:self-stretch lg:px-[clamp(1.5rem,3.5vw,3.5rem)]">
-          <div className="animate-rise relative order-first aspect-[581/650] self-start lg:self-auto h-[clamp(9.375rem,calc(100svh-35rem),14.375rem)] flex-none [--rise-delay:180ms] [@media(max-height:700px)]:hidden lg:order-none lg:block lg:h-[calc(100%+2.5rem)] lg:max-h-[38.75rem]">
+          <div className="animate-rise relative order-first aspect-[581/650] self-start lg:self-auto h-[clamp(9.375rem,calc(100svh-35rem),14.375rem)] flex-none [--rise-delay:180ms] [@media(max-height:700px)]:hidden lg:order-none lg:block lg:h-[calc(100%+2.5rem)] max-h-[var(--photo-cap)] lg:max-h-[min(38.75rem,var(--photo-cap))]"
+            // Never larger than half the image's pixels (sharp at 2x DPR). In px on purpose: it must not grow with
+            // the root-size scaling on large screens. Width follows the aspect ratio.
+            style={{ "--photo-cap": `${site.photo.cutoutSize[1] / 2}px` } as React.CSSProperties}
+          >
             <div
               aria-hidden
               className="absolute -inset-[20%] bg-[radial-gradient(closest-side_at_50%_42%,oklch(62%_.17_45/.5),oklch(55%_.15_45/.2)_55%,transparent)]"
@@ -48,7 +52,7 @@ export function IntroHero({ visible }: { visible: boolean }) {
                 src={site.photo.cutout}
                 alt={site.photo.alt}
                 fill
-                sizes="(min-width: 1921px) 1000px, (min-width: 1024px) 560px, 210px"
+                sizes="(min-width: 1921px) 1100px, (min-width: 1024px) 560px, 210px"
                 priority
                 className="object-contain object-bottom"
               />

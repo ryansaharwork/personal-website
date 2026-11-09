@@ -29,7 +29,11 @@ export default function AboutPage() {
 
       <div className="relative mx-auto grid max-w-site gap-14 px-5 pt-12 pb-20 lg:grid-cols-[23.75rem_1fr] lg:items-start lg:gap-20 lg:px-14 lg:pt-[3.875rem] lg:pb-16">
         <div className="flex flex-col gap-7">
-          <div className="relative size-[8.75rem] overflow-hidden rounded-full shadow-[0_0_0_0.1875rem_#0b0a09,0_0_0_0.3125rem_oklch(76%_.16_45),0_1.875rem_3.75rem_-1.25rem_rgba(0,0,0,.8)] lg:size-[12.5rem]">
+          <div
+            className="relative size-[8.75rem] max-h-[var(--photo-cap)] max-w-[var(--photo-cap)] overflow-hidden rounded-full shadow-[0_0_0_0.1875rem_#0b0a09,0_0_0_0.3125rem_oklch(76%_.16_45),0_1.875rem_3.75rem_-1.25rem_rgba(0,0,0,.8)] lg:size-[12.5rem]"
+            // The circle shows the photo's full width: cap it at half the image's pixels (sharp at 2x DPR), in px.
+            style={{ "--photo-cap": `${site.photo.srcSize[0] / 2}px` } as React.CSSProperties}
+          >
             {/* The 3:4 photo is cropped to a circle here; bias it up so the whole head stays in frame. */}
             <ImageSlot src={site.photo.src} alt={site.photo.alt} label="photo" sizes="(min-width: 1921px) 360px, 200px" priority position="50% 15%" />
           </div>
